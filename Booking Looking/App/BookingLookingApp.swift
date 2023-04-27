@@ -11,7 +11,9 @@ import SwiftUI
 struct Booking_LookingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EnterCodeScreen1()
+                .preferredColorScheme(.light)
         }
     }
+    
 }
