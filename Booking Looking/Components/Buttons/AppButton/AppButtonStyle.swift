@@ -9,26 +9,26 @@ import Foundation
 import SwiftUI
 
 enum AppButtonStyle {
-    case authorization
+    case standart
     case exit
     
     var background: Color {
         switch self {
-        case .authorization: return Color.black
+        case .standart: return Color.black
         case .exit: return Color.red
         }
     }
     
     var textColor: Color {
         switch self {
-        case .authorization: return Color.white
+        case .standart: return Color.white
         case .exit: return Color.white
         }
     }
     
     var borderColor: Color {
         switch self {
-        case .authorization: return Color.white.opacity(0.2)
+        case .standart: return Color.white.opacity(0.2)
         case .exit: return Color.red
         }
     }

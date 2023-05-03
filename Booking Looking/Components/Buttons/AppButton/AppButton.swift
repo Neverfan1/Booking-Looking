@@ -43,7 +43,7 @@ struct AppButton: View {
 
 struct AppButton_Previews: PreviewProvider {
     static var previews: some View {
-        AppButton(style: .authorization,
+        AppButton(style: .standart,
                   title: "Войти",
                   action: {},
         isButtonEnabled: false)

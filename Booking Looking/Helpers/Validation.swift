@@ -19,3 +19,5 @@ func isValidEmail(_ email: String) -> Bool {
     let regex = try? NSRegularExpression(pattern: pattern, options: [])
     return regex?.firstMatch(in: email, options: [], range: NSRange(location: 0, length: email.count)) != nil
 }
+
+

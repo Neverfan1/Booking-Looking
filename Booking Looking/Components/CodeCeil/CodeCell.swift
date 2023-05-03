@@ -13,8 +13,10 @@ struct CodeCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray, lineWidth: 1)
+                .stroke(Color.gray,lineWidth: 1.5)
                 .frame(width: 50, height: 50)
+                .background(.gray.opacity(0.56))
+                .cornerRadius(8)
             
             TextField("", text: $text)
                 .keyboardType(.numberPad)
@@ -23,6 +25,7 @@ struct CodeCell: View {
                 .multilineTextAlignment(.center)
                 .font(.system(size: 24, weight: .bold, design: .default))
                 .frame(width: 50, height: 50)
+                .foregroundColor(.primary)
                 .onReceive(text.publisher.collect(), perform: { newValue in
                     let filtered = newValue.filter(\.isWholeNumber)
                     self.text = String(filtered.prefix(1))

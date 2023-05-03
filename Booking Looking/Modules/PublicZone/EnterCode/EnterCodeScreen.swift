@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EnterCodeScreen1: View {
+struct EnterCodeScreen: View {
     @State private var code: [String] = ["", "", "", ""]
     @State private var isButtonEnabled = false
     @FocusState private var focusedField: Int?
@@ -16,28 +16,15 @@ struct EnterCodeScreen1: View {
     var body: some View {
         VStack(spacing: 20) {
             topLogo
-            Spacer()
-
-            HStack {
-                ForEach(codeFieldIndices, id: \.self) { index in
-                    CodeCell(text: $code[index])
-                        .focused($focusedField, equals: index)
-                        .onChange(of: code[index]) { newValue in
-                            if newValue.count == 1 && index < code.count - 1 {
-                                focusedField = index + 1
-                            }
-                        }
-                }
-            }
-            .padding()
-
-            AppButton(style: .authorization,
+            codeCells
+            AppButton(style: .standart,
                       title: "Войти",
                       action: {
                 let combined = code.joined(separator: "")
                 print(combined)
             },
                       isButtonEnabled: isButtonEnabled)
+            .padding(.top, UIScreen.main.bounds.height/13.6)
             Spacer()
         }
         .onChange(of: code) { newValue in
@@ -48,20 +35,38 @@ struct EnterCodeScreen1: View {
 }
 
 
-extension EnterCodeScreen1{
+extension EnterCodeScreen{
     var topLogo: some View{
         Image("logo")
             .renderingMode(.original)
             .resizable()
             .frame(width: UIScreen.main.bounds.width/1.3, height:  UIScreen.main.bounds.height/4.5)
-            .padding(.bottom, UIScreen.main.bounds.height/5.6)
+            .padding(.top, 14)
+            .padding(.bottom, UIScreen.main.bounds.height/7.6)
+        
+    }
+    
+    var codeCells: some View{
+        HStack {
+            ForEach(codeFieldIndices, id: \.self) { index in
+                CodeCell(text: $code[index])
+                    .focused($focusedField, equals: index)
+                    .onChange(of: code[index]) { newValue in
+                        if newValue.count == 1 && index < code.count - 1 {
+                            focusedField = index + 1
+                        }
+                    }
+            }
+        }
+        .padding()
+
         
     }
 }
 
-struct EnterCodeScreen1_Previews: PreviewProvider {
+struct EnterCodeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EnterCodeScreen1()
+        EnterCodeScreen()
     }
 }
 

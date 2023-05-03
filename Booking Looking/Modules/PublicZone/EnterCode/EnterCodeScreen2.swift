@@ -16,7 +16,7 @@ struct EnterCodeScreen2: View {
         VStack {
             topLogo
             codeField
-            AppButton(style: .authorization, title: "Войти", action: {}, isButtonEnabled: isButtonEnabled)
+            AppButton(style: .standart, title: "Войти", action: {}, isButtonEnabled: isButtonEnabled)
             
         }
     }

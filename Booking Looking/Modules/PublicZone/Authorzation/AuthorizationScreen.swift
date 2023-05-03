@@ -10,13 +10,17 @@ import SwiftUI
 struct LoginView: View {
     @State private var email: String = ""
     
+    private var isFormValid: Bool {
+        isValidEmail(email)
+    }
+    
     var body: some View {
         VStack {
             topLogo
             emailField
             
-            AppButton(style: .authorization, title: "Войти", action: {}, isButtonEnabled: true)
-            AppButton(style: .authorization, title: "Регистрация", action: {}, isButtonEnabled: true)
+            AppButton(style: .standart, title: "Войти", action: {}, isButtonEnabled: isFormValid)
+            AppButton(style: .standart, title: "Регистрация", action: {}, isButtonEnabled: true)
         }
     }
 }
