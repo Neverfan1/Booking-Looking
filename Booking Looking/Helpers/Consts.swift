@@ -2,7 +2,16 @@
 //  Consts.swift
 //  Booking Looking
 //
-//  Created by Данила Парамин on 21.04.2023.
+//  Created by Дмитрий Пантелеев on 10.05.2023.
 //
 
 import Foundation
+
+struct Consts {
+    private init() {}
+    
+    // MARK: - API
+    static let baseURL = "https://api-for-mobile-app.onrender.com/api"
+    
+    
+}

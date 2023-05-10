@@ -32,7 +32,6 @@ struct Booking_LookingApp: App {
                                      DateResponse(month: 6, year: 2023, dates: [4,7,9,10,11,12,13,14,20,26,27,28]),
                                      DateResponse(month: 7, year: 2023, dates: [17,19,20,21,22,23,24,25,26,30])], onBooking: {}
                          )
-                .preferredColorScheme(.light)
         }
     }
     
