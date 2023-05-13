@@ -81,6 +81,6 @@ extension UserView{
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(user: UserModel(id: 1, email: "example@example.com", name: "Иван", surname: "Иванов", sex: 0, phoneNumber: "89279180443"))
+        UserView(user: UserModel(email: "example@example.com", name: "Иван", surname: "Иванов", sex: 0, phoneNumber: "89279180443"))
     }
 }

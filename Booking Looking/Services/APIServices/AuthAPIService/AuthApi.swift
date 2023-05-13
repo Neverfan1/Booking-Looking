@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum AuthApi {
-    case authorisation(email: String)
+    case authorization(email: String)
     case checkCode(user: Int, code: String)
     case registration(phone: String, surname: String, name: String, sex: Int, email: String)
 }
@@ -21,7 +21,7 @@ extension AuthApi: TargetType {
     
     var path: String {
         switch self {
-        case .authorisation:
+        case .authorization:
             return "/auth/"
         case .checkCode:
             return "/check-code/"
@@ -36,7 +36,7 @@ extension AuthApi: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .authorisation(let email):
+        case .authorization(let email):
             var params: [String: Any] = [:]
             params["email"] = email
             return .requestParameters(parameters: params,
@@ -45,8 +45,7 @@ extension AuthApi: TargetType {
             var params: [String: Any] = [:]
             params["user_id"] = user
             params["code"] = code
-            return .requestParameters(parameters: params,
-                                      encoding: URLEncoding.default)
+            return .requestCompositeParameters(bodyParameters: params, bodyEncoding: JSONEncoding.default, urlParameters: [:])
         case .registration(let phone, let surname, let name, let sex, let email):
             var params: [String: Any] = [:]
             params["phone_number"] = phone
