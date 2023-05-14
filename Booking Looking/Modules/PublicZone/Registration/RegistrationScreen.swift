@@ -72,7 +72,7 @@ extension RegistrationView{
             .renderingMode(.original)
             .resizable()
             .frame(width: UIScreen.main.bounds.width/1.3, height:  UIScreen.main.bounds.height/4.5)
-            .padding(.bottom, UIScreen.main.bounds.height/9.4)
+            .padding(.bottom, UIScreen.main.bounds.height/12.4)
         
     }
     
@@ -124,9 +124,9 @@ extension RegistrationView{
     var sexUser: some View{
         HStack {
             Text("Пол:")
-                .font(.headline)
+                .foregroundColor(.primary)
+                .font(.body)
                 .padding(.leading, 20)
-                .foregroundColor(.black.opacity(0.6))
             Spacer()
             
             Button(action: {
@@ -141,7 +141,11 @@ extension RegistrationView{
                 }
             }
             .background(sex == 0 ? Color.black : Color.gray.opacity(0.56))
-            .cornerRadius(10)
+            .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(.black,lineWidth: 3)
+                    )
+            .cornerRadius(14)
             .padding(.trailing, 20)
             
             Button(action: {
@@ -156,7 +160,11 @@ extension RegistrationView{
                 }
             }
             .background(sex == 1 ? Color.black : Color.gray.opacity(0.56))
-            .cornerRadius(10)
+            .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(.black,lineWidth: 3)
+                    )
+            .cornerRadius(14)
             .padding(.trailing, 20)
         }
         .padding(.bottom, 10)
