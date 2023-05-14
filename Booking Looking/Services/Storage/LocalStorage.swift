@@ -23,21 +23,18 @@ struct LocalStorage {
     
     private init(){}
     
-    var ID: Int? {
-        
+    var ID: Int {
         get {
             userDefaults.integer(forKey: LocalStorageKey.ID.rawValue)
         }
-        
         set{
             userDefaults.set(newValue, forKey: LocalStorageKey.ID.rawValue)
         }
     }
     
-    var token: String? {
-        
+    var token: String {
         get {
-            userDefaults.string(forKey: LocalStorageKey.token.rawValue)
+            userDefaults.string(forKey: LocalStorageKey.token.rawValue) ?? ""
         }
         set {
             userDefaults.set(newValue, forKey: LocalStorageKey.token.rawValue)
@@ -51,15 +48,5 @@ struct LocalStorage {
         set {
             userDefaults.setValue(newValue, forKey: "isComplited")
         }
-    }
-}
-
-struct AuthenticationLocalService {
-    
-    static var shared = AuthenticationLocalService()
-    let status: CurrentValueSubject<Bool, Never>
-    
-    private init() {
-        self.status = CurrentValueSubject<Bool, Never>(LocalStorage.current.isComplited)
     }
 }

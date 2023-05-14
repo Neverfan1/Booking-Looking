@@ -9,20 +9,29 @@ import SwiftUI
 import Combine
 
 struct EnterCodeScreen2: View {
-    @State private var code: String = ""
-    @State private var isButtonEnabled = false
 
+    @StateObject var viewModel: EnterCodeViewModel
+    
     var body: some View {
-        VStack {
-            topLogo
-            codeField
-            AppButton(style: .standart, title: "Войти", action: {}, isButtonEnabled: isButtonEnabled)
-            
-        }
+        StateView(state: viewModel.output.screenState,
+                  content: content)
     }
 }
 
-extension EnterCodeScreen2{
+private extension EnterCodeScreen2 {
+    
+    func content() -> some View {
+        VStack {
+            topLogo
+            codeField
+            AppButton(style: .standart,
+                      title: "Войти",
+                      action: onConfirmTap,
+                      isButtonEnabled: viewModel.output.isButtonEnabled)
+            
+        }
+    }
+    
     var topLogo: some View{
         Image("logo")
             .renderingMode(.original)
@@ -33,17 +42,28 @@ extension EnterCodeScreen2{
     }
     
     var codeField: some View{
-        TextField("Код", text: $code)
+        TextField("Код", text: $viewModel.output.code)
             .keyboardType(.numberPad)
             .textFieldStyle(CustomTextFieldStyle())
-            .onChange(of: code) { newValue in
-                isButtonEnabled = newValue.count == 4 && newValue.allSatisfy { $0.isNumber }
-            }
+            .onChange(of: viewModel.output.code,
+                      perform: onChangeOfCode)
     }
 }
 
-struct EnterCodeScreen2_Previews: PreviewProvider {
-    static var previews: some View {
-        EnterCodeScreen2()
+private extension EnterCodeScreen2 {
+    func onChangeOfCode(_ value: String) {
+        viewModel.input.onChangeCode.send(value)
+    }
+    
+    func onConfirmTap() {
+        viewModel.input.onConfirmTap.send()
     }
 }
+
+#if DEBUG
+struct EnterCodeScreen2_Previews: PreviewProvider {
+    static var previews: some View {
+        EnterCodeScreen2(viewModel: EnterCodeViewModel(apiService: AuthApiService(), router: nil))
+    }
+}
+#endif

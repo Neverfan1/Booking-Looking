@@ -74,6 +74,14 @@
 		D044D4132A0E4F5B00F06177 /* TargetType + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4122A0E4F5B00F06177 /* TargetType + Extensions.swift */; };
 		D044D4162A0E583E00F06177 /* BookingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4152A0E583E00F06177 /* BookingApi.swift */; };
 		D044D4182A0E584500F06177 /* BookingApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4172A0E584500F06177 /* BookingApiService.swift */; };
+		D059B2F52A1139FF00D85F8A /* ProcessingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F42A1139FF00D85F8A /* ProcessingState.swift */; };
+		D059B2F72A113A4200D85F8A /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F62A113A4200D85F8A /* StateView.swift */; };
+		D059B2F92A11414000D85F8A /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F82A11414000D85F8A /* RegistrationRouter.swift */; };
+		D059B2FB2A1142E500D85F8A /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2FA2A1142E500D85F8A /* AuthorizationViewModel.swift */; };
+		D059B2FD2A11440900D85F8A /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2FC2A11440900D85F8A /* AuthorizationRouter.swift */; };
+		D059B2FF2A11494800D85F8A /* EnterCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2FE2A11494800D85F8A /* EnterCodeViewModel.swift */; };
+		D059B3012A114A0500D85F8A /* EnterCodeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3002A114A0500D85F8A /* EnterCodeRouter.swift */; };
+		D059B3032A11539600D85F8A /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3022A11539600D85F8A /* AuthState.swift */; };
 		D0D3CFB32A0CEC1F008B5BF7 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +147,14 @@
 		D044D4122A0E4F5B00F06177 /* TargetType + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetType + Extensions.swift"; sourceTree = "<group>"; };
 		D044D4152A0E583E00F06177 /* BookingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingApi.swift; sourceTree = "<group>"; };
 		D044D4172A0E584500F06177 /* BookingApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingApiService.swift; sourceTree = "<group>"; };
+		D059B2F42A1139FF00D85F8A /* ProcessingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingState.swift; sourceTree = "<group>"; };
+		D059B2F62A113A4200D85F8A /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		D059B2F82A11414000D85F8A /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
+		D059B2FA2A1142E500D85F8A /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		D059B2FC2A11440900D85F8A /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
+		D059B2FE2A11494800D85F8A /* EnterCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCodeViewModel.swift; sourceTree = "<group>"; };
+		D059B3002A114A0500D85F8A /* EnterCodeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCodeRouter.swift; sourceTree = "<group>"; };
+		D059B3022A11539600D85F8A /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +265,7 @@
 		B5DA32AC29F1D2A400DD2F2B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D059B2F32A1139E500D85F8A /* Processing */,
 				D001D6FB2A0B934800B44C63 /* TextField */,
 				D001D6F82A0B934000B44C63 /* TabBarItem */,
 				D001D6DD2A0B900700B44C63 /* AccommodationCard */,
@@ -486,6 +503,7 @@
 			children = (
 				D001D7192A0B947100B44C63 /* RegistrationScreen.swift */,
 				D001D7252A0B9EEA00B44C63 /* RegistrationViewModel.swift */,
+				D059B2F82A11414000D85F8A /* RegistrationRouter.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -494,6 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				D001D71B2A0B947200B44C63 /* AuthorizationScreen.swift */,
+				D059B2FA2A1142E500D85F8A /* AuthorizationViewModel.swift */,
+				D059B2FC2A11440900D85F8A /* AuthorizationRouter.swift */,
 			);
 			path = Authorzation;
 			sourceTree = "<group>";
@@ -503,6 +523,8 @@
 			children = (
 				D001D71D2A0B947200B44C63 /* EnterCodeScreen.swift */,
 				D001D71E2A0B947200B44C63 /* EnterCodeScreen2.swift */,
+				D059B2FE2A11494800D85F8A /* EnterCodeViewModel.swift */,
+				D059B3002A114A0500D85F8A /* EnterCodeRouter.swift */,
 			);
 			path = EnterCode;
 			sourceTree = "<group>";
@@ -533,6 +555,7 @@
 				D001D72F2A0BAEFC00B44C63 /* ServerModels */,
 				D001D7312A0BAEFC00B44C63 /* LocalModels */,
 				D001D7352A0BAEFC00B44C63 /* Mappers */,
+				D059B3022A11539600D85F8A /* AuthState.swift */,
 			);
 			name = Models;
 			path = "../../../../Downloads/Telegram Desktop/Booking Looking/Models";
@@ -623,6 +646,15 @@
 				D044D4172A0E584500F06177 /* BookingApiService.swift */,
 			);
 			path = BookingAPIService;
+			sourceTree = "<group>";
+		};
+		D059B2F32A1139E500D85F8A /* Processing */ = {
+			isa = PBXGroup;
+			children = (
+				D059B2F42A1139FF00D85F8A /* ProcessingState.swift */,
+				D059B2F62A113A4200D85F8A /* StateView.swift */,
+			);
+			path = Processing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -721,12 +753,14 @@
 				D001D7012A0B943400B44C63 /* Converter.swift in Sources */,
 				D001D74B2A0BC0B000B44C63 /* CheckCodeResponse.swift in Sources */,
 				D001D6FD2A0B934800B44C63 /* CustomTextField.swift in Sources */,
+				D059B2F72A113A4200D85F8A /* StateView.swift in Sources */,
 				D001D6DF2A0B900700B44C63 /* AccommodationCard.swift in Sources */,
 				D001D6DC2A0B8FA600B44C63 /* UserCoordinator.swift in Sources */,
 				D001D6F42A0B92F500B44C63 /* NetworkImage.swift in Sources */,
 				D044D40A2A0E300400F06177 /* AccommodationModelMapper.swift in Sources */,
 				D044D4182A0E584500F06177 /* BookingApiService.swift in Sources */,
 				D001D72C2A0B9F9300B44C63 /* ViewModelProtocol.swift in Sources */,
+				D059B2FB2A1142E500D85F8A /* AuthorizationViewModel.swift in Sources */,
 				D044D4162A0E583E00F06177 /* BookingApi.swift in Sources */,
 				B5DA329729F1CAF700DD2F2B /* MainCoordinator.swift in Sources */,
 				D001D7372A0BAEFC00B44C63 /* ServerUserModel.swift in Sources */,
@@ -742,10 +776,13 @@
 				D001D7572A0BCF2B00B44C63 /* UserApiService.swift in Sources */,
 				D001D73E2A0BB53000B44C63 /* AuthApi.swift in Sources */,
 				D001D7552A0BCF2200B44C63 /* UserApi.swift in Sources */,
+				D059B3032A11539600D85F8A /* AuthState.swift in Sources */,
 				D001D6D92A0B8F9D00B44C63 /* TabBarCoordinator.swift in Sources */,
 				D001D6D62A0B8F8700B44C63 /* AuthorizationCoordinator.swift in Sources */,
 				D044D4132A0E4F5B00F06177 /* TargetType + Extensions.swift in Sources */,
+				D059B2FF2A11494800D85F8A /* EnterCodeViewModel.swift in Sources */,
 				D001D7202A0B947200B44C63 /* AuthorizationScreen.swift in Sources */,
+				D059B2FD2A11440900D85F8A /* AuthorizationRouter.swift in Sources */,
 				D001D7212A0B947200B44C63 /* EnterCodeScreen.swift in Sources */,
 				D001D7132A0B946800B44C63 /* SearchAccommodationScreen.swift in Sources */,
 				D001D7422A0BB90600B44C63 /* AuthApiService.swift in Sources */,
@@ -762,12 +799,15 @@
 				D001D6FA2A0B934000B44C63 /* TabBar.swift in Sources */,
 				D001D6FF2A0B942B00B44C63 /* ColorTheme.swift in Sources */,
 				D001D7112A0B946800B44C63 /* UserBookingScreen.swift in Sources */,
+				D059B3012A114A0500D85F8A /* EnterCodeRouter.swift in Sources */,
 				D001D73A2A0BAEFC00B44C63 /* UserModel.swift in Sources */,
 				D001D7592A0BCFAD00B44C63 /* UserModelMapper.swift in Sources */,
 				D001D6EE2A0B926900B44C63 /* ChekBox.swift in Sources */,
 				D044D40F2A0E494100F06177 /* AccommodationApi.swift in Sources */,
 				B5DA32A629F1CC6E00DD2F2B /* APIError.swift in Sources */,
 				D001D7162A0B946800B44C63 /* FilterModal.swift in Sources */,
+				D059B2F92A11414000D85F8A /* RegistrationRouter.swift in Sources */,
+				D059B2F52A1139FF00D85F8A /* ProcessingState.swift in Sources */,
 				D001D73B2A0BAEFC00B44C63 /* BaseModelMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

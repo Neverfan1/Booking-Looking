@@ -10,11 +10,31 @@ import Moya
 import Combine
 import CombineMoya
 
+
+// MARK: - Protocols
+protocol RegistraionApiProtocol {
+    func registration(phone: String,
+                      surname: String,
+                      name: String,
+                      sex: Int,
+                      email: String) -> AnyPublisher<AuthResponse, APIError>
+}
+
+protocol AuthorizationApiProtocol {
+    func authorize(email: String) -> AnyPublisher<AuthResponse, APIError>
+}
+
+protocol CodeApiProtocol {
+    func checkCode(user: Int, code: String) -> AnyPublisher<CheckCode, APIError>
+}
+
+// MARK: - Service
 struct AuthApiService {
     let provider = Provider<AuthApi>()
 }
 
-extension AuthApiService {
+// MARK: - API-methods
+extension AuthApiService: AuthorizationApiProtocol {
     func authorize(email: String) -> AnyPublisher<AuthResponse, APIError> {
         provider.requestPublisher(.authorization(email: email))
             .filterSuccessfulStatusCodes()
@@ -28,7 +48,9 @@ extension AuthApiService {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-    
+}
+
+extension AuthApiService: CodeApiProtocol {
     func checkCode(user: Int, code: String) -> AnyPublisher<CheckCode, APIError> {
         provider.requestPublisher(.checkCode(user: user,
                                              code: code))
@@ -43,7 +65,9 @@ extension AuthApiService {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-    
+}
+
+extension AuthApiService: RegistraionApiProtocol {
     func registration(phone: String,
                       surname: String,
                       name: String,

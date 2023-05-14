@@ -8,24 +8,28 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
     
-    private var isFormValid: Bool {
-        isValidEmail(email)
-    }
+    @StateObject var viewModel: AuthorizationViewModel
     
     var body: some View {
         VStack {
             topLogo
             emailField
             
-            AppButton(style: .standart, title: "Войти", action: {}, isButtonEnabled: isFormValid)
-            AppButton(style: .standart, title: "Регистрация", action: {}, isButtonEnabled: true)
+            AppButton(style: .standart,
+                      title: "Войти",
+                      action: onSignInTap,
+                      isButtonEnabled: isFormValid)
+            
+            AppButton(style: .standart,
+                      title: "Регистрация",
+                      action: onSignUpTap,
+                      isButtonEnabled: true)
         }
     }
 }
 
-extension LoginView{
+private extension LoginView {
     var topLogo: some View{
         Image("logo")
             .renderingMode(.original)
@@ -35,15 +39,38 @@ extension LoginView{
     }
     
     var emailField: some View{
-        TextField("Email", text: $email)
+        TextField("E-mail", text: $viewModel.output.email)
             .textFieldStyle(CustomTextFieldStyle())
             .padding(.bottom, 20)
+            .onChange(of: viewModel.output.email,
+                      perform: onChangeOfEmail)
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
+private extension LoginView {
+    var isFormValid: Bool {
+        isValidEmail(viewModel.output.email)
+    }
+    
+    func onChangeOfEmail(_ value: String) {
+        viewModel.input.onChangeEmail.send(value)
+    }
+    
+    func onSignInTap() {
+        viewModel.input.onSignInTap.send()
+    }
+    
+    func onSignUpTap() {
+        viewModel.router?.pushToRegister()
     }
 }
+
+#if DEBUG
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView(viewModel: AuthorizationViewModel(apiService: AuthApiService(),
+                                                    router: nil))
+    }
+}
+#endif
 

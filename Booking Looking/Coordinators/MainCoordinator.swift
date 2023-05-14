@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Stinsen
+import Combine
 
 final class MainCoordinator: NavigationCoordinatable {
 
@@ -15,32 +16,37 @@ final class MainCoordinator: NavigationCoordinatable {
 
     @Root var authorization = makeAuthorization
     @Root var general = makeTabBar
+    
+    let authState = CurrentValueSubject<AuthState, Never>(.unauthorized)
+    private var cancellable = Set<AnyCancellable>()
 
     init() {
-        if AuthenticationLocalService.shared.status.value {
-            stack = NavigationStack(initial: \MainCoordinator.general)
-        } else {
+        if LocalStorage.current.token.isEmpty {
             stack = NavigationStack(initial: \MainCoordinator.authorization)
+        } else {
+            stack = NavigationStack(initial: \MainCoordinator.general)
         }
-    }
+        
+        authState
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                guard let self = self else { return }
 
-    @ViewBuilder func customize(_ view: AnyView) -> some View {
-        view
-            .onReceive(AuthenticationLocalService.shared.status) { status in
-                if status {
-                    self.root(\.general)
-                } else {
+                switch state {
+                case .unauthorized:
                     self.root(\.authorization)
+                case .authorized:
+                    self.root(\.general)
                 }
             }
+            .store(in: &cancellable)
     }
 }
 
 extension MainCoordinator {
-
-
     func makeAuthorization() -> NavigationViewCoordinator<AuthorizationCoordinator> {
-        let coordinator = AuthorizationCoordinator()
+        let coordinator = AuthorizationCoordinator(authState: authState)
         let stack = NavigationViewCoordinator(coordinator)
         return stack
     }

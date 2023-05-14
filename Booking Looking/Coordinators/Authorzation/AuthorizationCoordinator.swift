@@ -8,13 +8,22 @@
 import Foundation
 import SwiftUI
 import Stinsen
+import Combine
 
 final class AuthorizationCoordinator: NavigationCoordinatable {
     
-    let stack = NavigationStack(initial: \AuthorizationCoordinator.loginBL)
+    let stack = NavigationStack(initial: \AuthorizationCoordinator.login)
     
-    @Root var loginBL = makeLogin
-    @Route(.modal) var webLogin = makeRegistration
+    @Root var login = makeLogin
+    @Route(.modal) var register = makeRegistration
+    @Route(.push) var code = makeCode
+    
+    let authState: CurrentValueSubject<AuthState, Never>
+    private let apiService = AuthApiService()
+    
+    init(authState: CurrentValueSubject<AuthState, Never>) {
+        self.authState = authState
+    }
     
 #if DEBUG
     deinit {
@@ -26,12 +35,20 @@ final class AuthorizationCoordinator: NavigationCoordinatable {
 extension AuthorizationCoordinator {
     
     @ViewBuilder func makeLogin() -> some View {
-//        let viewModel = (router: self)
-        LoginView()
+        let viewModel = AuthorizationViewModel(apiService: apiService,
+                                               router: self)
+        LoginView(viewModel: viewModel)
     }
     
     @ViewBuilder func makeRegistration() -> some View {
-//        let viewModel = WebViewRepresentableModel()
-        RegistrationView()
+        let viewModel = RegistrationViewModel(apiService: apiService,
+                                              router: self)
+        RegistrationView(viewModel: viewModel)
+    }
+    
+    @ViewBuilder func makeCode() -> some View {
+        let viewModel = EnterCodeViewModel(apiService: apiService,
+                                           router: self)
+        EnterCodeScreen2(viewModel: viewModel)
     }
 }
