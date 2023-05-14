@@ -9,11 +9,17 @@ import Foundation
 import Combine
 import CombineMoya
 
+// MARK: - Protocols
+protocol ProfileApiProtocol {
+    func getDetailInfo(id: Int) -> AnyPublisher<UserModel, APIError>
+}
+
 struct UserApiService {
     let provider = Provider<UserApi>()
 }
 
-extension UserApiService {
+// MARK: - API-methods
+extension UserApiService: ProfileApiProtocol {
     func getDetailInfo(id: Int) -> AnyPublisher<UserModel, APIError> {
         provider.requestPublisher(.getDetail(id: id))
             .filterSuccessfulStatusCodes()
@@ -27,7 +33,9 @@ extension UserApiService {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-    
+}
+
+extension UserApiService {
     func getBooking() -> AnyPublisher<[AccommodationModel], APIError> {
         provider.requestPublisher(.getBooking)
             .filterSuccessfulStatusCodes()

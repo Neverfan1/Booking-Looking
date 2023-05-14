@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct UserView: View {
-    let user: UserModel
+    
+    @StateObject var viewModel: UserProfileViewModel
     
     var body: some View {
         ScrollView {
@@ -38,12 +39,12 @@ extension UserView{
             .resizable()
             .scaledToFit()
             .frame(width: 150, height: 150)
-            .foregroundColor(user.sex == 0 ? .blue.opacity(0.8) : .pink.opacity(0.8))
+            .foregroundColor(viewModel.output.user.sex == 0 ? .blue.opacity(0.8) : .pink.opacity(0.8))
         
     }
     
     var fullNameUser: some View{
-        Text(user.fullName)
+        Text(viewModel.output.user.fullName)
             .font(.title)
             .fontWeight(.bold)
         
@@ -54,7 +55,7 @@ extension UserView{
             Text("Email:")
                 .fontWeight(.bold)
             Spacer()
-            Text(user.email)
+            Text(viewModel.output.user.email)
         }
     }
     
@@ -63,7 +64,7 @@ extension UserView{
             Text("Пол:")
                 .fontWeight(.bold)
             Spacer()
-            Text(user.sex == 0 ? "Мужской" : "Женский")
+            Text(viewModel.output.user.sex == 0 ? "Мужской" : "Женский")
                 .font(.subheadline)
         }
         
@@ -74,13 +75,15 @@ extension UserView{
             Text("Телефон:")
                 .fontWeight(.bold)
             Spacer()
-            Text(user.phoneNumber)
+            Text(viewModel.output.user.phoneNumber)
         }
     }
 }
 
+#if DEBUG
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(user: UserModel(email: "example@example.com", name: "Иван", surname: "Иванов", sex: 0, phoneNumber: "89279180443"))
+        UserView(viewModel: UserProfileViewModel(apiService: UserApiService()))
     }
 }
+#endif

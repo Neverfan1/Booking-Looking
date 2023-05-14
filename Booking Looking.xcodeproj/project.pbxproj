@@ -82,6 +82,7 @@
 		D059B2FF2A11494800D85F8A /* EnterCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2FE2A11494800D85F8A /* EnterCodeViewModel.swift */; };
 		D059B3012A114A0500D85F8A /* EnterCodeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3002A114A0500D85F8A /* EnterCodeRouter.swift */; };
 		D059B3032A11539600D85F8A /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3022A11539600D85F8A /* AuthState.swift */; };
+		D059B3052A11598F00D85F8A /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3042A11598F00D85F8A /* UserProfileViewModel.swift */; };
 		D0D3CFB32A0CEC1F008B5BF7 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +156,7 @@
 		D059B2FE2A11494800D85F8A /* EnterCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCodeViewModel.swift; sourceTree = "<group>"; };
 		D059B3002A114A0500D85F8A /* EnterCodeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCodeRouter.swift; sourceTree = "<group>"; };
 		D059B3022A11539600D85F8A /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		D059B3042A11598F00D85F8A /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				D001D7082A0B946800B44C63 /* UserProfileScreen.swift */,
+				D059B3042A11598F00D85F8A /* UserProfileViewModel.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -457,9 +460,9 @@
 			isa = PBXGroup;
 			children = (
 				D001D70A2A0B946800B44C63 /* SearchAccommodation */,
-				D001D70C2A0B946800B44C63 /* AccommodationDetailScreen.swift */,
 				D001D70D2A0B946800B44C63 /* Booking */,
 				D001D70F2A0B946800B44C63 /* Filter */,
+				D001D70C2A0B946800B44C63 /* AccommodationDetailScreen.swift */,
 			);
 			path = Accommodation;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				B5DA32A829F1CD6B00DD2F2B /* LocalStorage.swift in Sources */,
 				D001D7402A0BB59400B44C63 /* Consts.swift in Sources */,
 				D001D7522A0BCA4700B44C63 /* CheckCodeModelMapper.swift in Sources */,
+				D059B3052A11598F00D85F8A /* UserProfileViewModel.swift in Sources */,
 				D001D7392A0BAEFC00B44C63 /* AccommodationModel.swift in Sources */,
 				D001D6F12A0B92E800B44C63 /* CodeCell.swift in Sources */,
 				D001D7152A0B946800B44C63 /* BookingModal.swift in Sources */,
