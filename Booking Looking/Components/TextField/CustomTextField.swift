@@ -15,7 +15,11 @@ struct CustomTextFieldStyle: TextFieldStyle {
             .background(Color.gray.opacity(0.56))
             .foregroundColor(.primary)
             .bold()
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(.black,lineWidth: 3)
+                    )
+            .cornerRadius(14)
             .padding(.horizontal, 10)
 
     }

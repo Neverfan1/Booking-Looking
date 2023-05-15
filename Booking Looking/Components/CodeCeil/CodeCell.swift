@@ -13,7 +13,7 @@ struct CodeCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray,lineWidth: 1.5)
+                .stroke(Color.black,lineWidth: 2.5)
                 .frame(width: 50, height: 50)
                 .background(.gray.opacity(0.56))
                 .cornerRadius(8)
