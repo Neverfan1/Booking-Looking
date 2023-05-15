@@ -8,20 +8,29 @@
 import SwiftUI
 
 struct UserBooking: View {
-    let accommodations: [AccommodationBookingModel]
-    @State private var selectedImageIndex = 0
-
+    
+    @StateObject var viewModel: UserBookingViewModel
     
     var body: some View {
+        StateView(state: viewModel.output.screenState,
+                  onAppear: viewModel.input.onAppear,
+                  content: content)
+    }
+}
+
+private extension UserBooking {
+    func content() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                ForEach(accommodations) { accommodation in
-
+                ForEach(viewModel.output.accommodations) { accommodation in
+                    
                     ImageCarousel(accommodationPhoto: accommodation.images)
+                    
                     Text("Даты бронирования:")
                         .bold()
                         .font(.system(size: 18))
                         .padding(.bottom,5)
+                    
                     ForEach(accommodation.booking_dates) { accommodationb in
                         VStack(alignment: .leading){
                             HStack(alignment: .top)  {
@@ -48,15 +57,17 @@ struct UserBooking: View {
                             }
                         Divider()
                     }
+                    
                     AppButton(style: .standart,
                               title: "Подробнее",
                               action: {},
-                    isButtonEnabled: true)
+                              isButtonEnabled: true)
 
                     AppButton(style: .standart,
                               title: "Удалить бронь",
                               action: {},
-                    isButtonEnabled: true)
+                              isButtonEnabled: true)
+                    
                     Divider()
                         .background(.black)
 
@@ -67,14 +78,12 @@ struct UserBooking: View {
     }
 }
 
-extension UserBooking{
-}
-
+#if DEBUG
 struct UserBooking_Previews: PreviewProvider {
     static var previews: some View {
-        UserBooking(accommodations: [AccommodationBookingModel.mock(),
-                                     AccommodationBookingModel.mock()])
+        UserBooking(viewModel: UserBookingViewModel(apiService: UserApiService()))
     }
 }
+#endif
 
 

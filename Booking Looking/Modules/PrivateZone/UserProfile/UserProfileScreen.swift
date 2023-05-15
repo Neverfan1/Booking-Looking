@@ -12,6 +12,15 @@ struct UserView: View {
     @StateObject var viewModel: UserProfileViewModel
     
     var body: some View {
+        StateView(state: viewModel.output.screenState,
+                  onAppear: viewModel.input.onAppear,
+                  content: content)
+        .navigationTitle("Профиль пользователя")
+    }
+}
+extension UserView{
+    
+    func content() -> some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
                 photoUser
@@ -29,10 +38,7 @@ struct UserView: View {
             }
             .padding(.horizontal, 30)
         }
-        .navigationTitle("Профиль пользователя")
     }
-}
-extension UserView{
     
     var photoUser: some View{
         Image(systemName: "person.circle.fill")

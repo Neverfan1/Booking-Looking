@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FilterView: View {
     @Binding var filter: Filter
-    var onSearch: () -> Void
+    let onSearchUpdate: PassthroughSubject<Filter, Never>
     
     
     let housingTypes = ["Не выбрано", "Квартира", "Гостиница", "Дом"]
@@ -22,41 +23,29 @@ struct FilterView: View {
     @State private var selectedBeds: Int = 0
     @State private var selectedCapacity: Int = 0
     
-    
     @State private var priceTo: String = ""
     @State private var priceFrom: String = ""
     
     var body: some View {
-        NavigationView {
-            VStack{
-                Form {
-                    typeSection
-                    roomsSection
-                    bedsSection
-                    capacitySection
-                    priceSection
-                }
-                .navigationBarTitle("Фильтр", displayMode: .inline)
-                AppButton(style: .standart, title: "Поиск", action: {
-                    updateFilter()
-                    onSearch()
-                }, isButtonEnabled:  true)
+        VStack{
+            Form {
+                typeSection
+                roomsSection
+                bedsSection
+                capacitySection
+                priceSection
             }
             
+            AppButton(style: .standart,
+                      title: "Поиск",
+                      action: updateFilter,
+                      isButtonEnabled:  true)
         }
+        .navigationBarTitle("Фильтр", displayMode: .inline)
     }
-    
-    private func updateFilter() {
-        filter.type = selectedType == "Не выбрано" ? nil : selectedType
-        filter.rooms = selectedRooms == 0 ? nil : selectedRooms
-        filter.beds = selectedBeds == 0 ? nil : selectedBeds
-        filter.capacity = selectedCapacity == 0 ? nil : selectedCapacity
-        filter.priceTo = priceTo.isEmpty ? nil :  Int(priceTo)
-        filter.priceFrom = priceFrom.isEmpty ? nil :  Int(priceFrom)
-    }
-    
 }
-extension FilterView{
+
+private extension FilterView {
     var typeSection: some View{
         Section() {
             Picker("Тип жилища", selection: $selectedType) {
@@ -111,9 +100,25 @@ extension FilterView{
     }
 }
 
+private extension FilterView {
+    func updateFilter() {
+        filter.type = selectedType == "Не выбрано" ? nil : selectedType
+        filter.rooms = selectedRooms == 0 ? nil : selectedRooms
+        filter.beds = selectedBeds == 0 ? nil : selectedBeds
+        filter.capacity = selectedCapacity == 0 ? nil : selectedCapacity
+        filter.priceTo = priceTo.isEmpty ? nil :  Int(priceTo)
+        filter.priceFrom = priceFrom.isEmpty ? nil :  Int(priceFrom)
+        
+        onSearchUpdate.send(filter)
+    }
+}
+
+#if DEBUG
 struct FilterView_Previews: PreviewProvider {
     @State static var filter: Filter = Filter(type: nil,rooms: nil,beds: nil,capacity: nil,priceTo: nil,priceFrom: nil)
     static var previews: some View {
-        FilterView(filter: $filter, onSearch: {})
+        FilterView(filter: $filter,
+                   onSearchUpdate: PassthroughSubject<Filter, Never>())
     }
 }
+#endif

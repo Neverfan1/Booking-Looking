@@ -14,6 +14,10 @@ protocol ProfileApiProtocol {
     func getDetailInfo(id: Int) -> AnyPublisher<UserModel, APIError>
 }
 
+protocol ProfileBookingApiProtocol {
+    func getBooking() -> AnyPublisher<[AccommodationModel], APIError>
+}
+
 struct UserApiService {
     let provider = Provider<UserApi>()
 }
@@ -35,7 +39,7 @@ extension UserApiService: ProfileApiProtocol {
     }
 }
 
-extension UserApiService {
+extension UserApiService: ProfileBookingApiProtocol {
     func getBooking() -> AnyPublisher<[AccommodationModel], APIError> {
         provider.requestPublisher(.getBooking)
             .filterSuccessfulStatusCodes()

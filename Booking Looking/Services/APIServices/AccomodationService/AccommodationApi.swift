@@ -10,7 +10,7 @@ import Moya
 import CombineMoya
 
 enum AccommodationApi {
-    case filter(type: Int?, rooms: Int?, beds: Int?, capacity: Int?, priceTo: Int?, priceFrom: Int?, offset: Int, count: Int)
+    case filter(type: String?, rooms: Int?, beds: Int?, capacity: Int?, priceTo: Int?, priceFrom: Int?, offset: Int, count: Int)
     case detail(id: Int)
 }
 
@@ -52,6 +52,7 @@ extension AccommodationApi: TargetType {
             }
             params["offset"] = offset
             params["count"] = count
+            
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
         default: return .requestPlain

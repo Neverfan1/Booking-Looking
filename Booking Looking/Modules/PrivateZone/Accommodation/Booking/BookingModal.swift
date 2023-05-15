@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookingView: View {
-    let freeDates: [DateResponse]
+    let freeDates: [DateModel]
     @State var selectedDates: [Date] = []
     
     var onBooking: () -> Void
@@ -19,14 +19,18 @@ struct BookingView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     ForEach(freeDates, id: \.self) { freeDate in
-                        CalendarView(freeDate: freeDate, selectedDates: $selectedDates)
+                        CalendarView(freeDate: freeDate,
+                                     selectedDates: $selectedDates)
                             .padding(.bottom)
                     }
                     
-                    AppButton(style: .standart, title: "Забронировать", action: {
-                        print(groupDatesByMonthAndYear(selectedDates))
-                        onBooking()
-                    }, isButtonEnabled: true)
+                    AppButton(style: .standart,
+                              title: "Забронировать",
+                              action: {
+                                print(groupDatesByMonthAndYear(selectedDates))
+                                onBooking()
+                              },
+                              isButtonEnabled: true)
                     
                 }
             }
@@ -37,9 +41,9 @@ struct BookingView: View {
 
 struct BookingView_Previews: PreviewProvider {
     static var previews: some View {
-        BookingView( freeDates: [DateResponse(month: 5, year: 2023, dates: [1,2,3,4,5,6,7]),
-                                 DateResponse(month: 6, year: 2023, dates: [4,7,9,10,11,12,13,14,20,26,27,28]),
-                                 DateResponse(month: 7, year: 2023, dates: [17,19,20,21,22,23,24,25,26,30])], onBooking: {}
+        BookingView( freeDates: [DateModel(month: 5, year: 2023, dates: [1,2,3,4,5,6,7]),
+                                 DateModel(month: 6, year: 2023, dates: [4,7,9,10,11,12,13,14,20,26,27,28]),
+                                 DateModel(month: 7, year: 2023, dates: [17,19,20,21,22,23,24,25,26,30])], onBooking: {}
                      )
     }
 }
