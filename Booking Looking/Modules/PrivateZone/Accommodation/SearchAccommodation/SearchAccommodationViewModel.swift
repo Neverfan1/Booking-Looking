@@ -28,7 +28,7 @@ final class SearchAccommodationViewModel: ObservableObject {
         
         self.input = Input()
         self.output = Output()
-        
+        // TODO: pag
         bind()
     }
 }

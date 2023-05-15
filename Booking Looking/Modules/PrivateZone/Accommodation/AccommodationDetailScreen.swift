@@ -15,6 +15,11 @@ struct AccommodationDetail: View {
         StateView(state: viewModel.output.screenState,
                   onAppear: viewModel.input.onAppear,
                   content: content)
+        .sheet(isPresented: $viewModel.output.showingCalendar) {
+            BookingView(freeDates: viewModel.output.accommodation.freeDates) {
+                viewModel.output.showingCalendar = false
+            }
+        }
     }
 }
 
@@ -41,12 +46,6 @@ private extension AccommodationDetail {
                           title: "Выбрать даты",
                           action: onDateTap,
                           isButtonEnabled: true)
-                
-                .sheet(isPresented: $viewModel.output.showingCalendar) {
-                    BookingView(freeDates: viewModel.output.accommodation.freeDates) {
-                        viewModel.output.showingCalendar = false
-                    }
-                }
                 .padding(.top)
             }
         }

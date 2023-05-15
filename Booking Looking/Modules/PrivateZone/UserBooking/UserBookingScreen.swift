@@ -58,11 +58,13 @@ private extension UserBooking {
                         Divider()
                     }
                     
+                    // TODO: route to detail
                     AppButton(style: .standart,
                               title: "Подробнее",
                               action: {},
                               isButtonEnabled: true)
 
+                    // TODO: delete 
                     AppButton(style: .standart,
                               title: "Удалить бронь",
                               action: {},

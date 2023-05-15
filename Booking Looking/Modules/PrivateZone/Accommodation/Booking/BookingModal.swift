@@ -17,11 +17,10 @@ struct BookingView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 16) {
                     ForEach(freeDates, id: \.self) { freeDate in
                         CalendarView(freeDate: freeDate,
                                      selectedDates: $selectedDates)
-                            .padding(.bottom)
                     }
                     
                     AppButton(style: .standart,
