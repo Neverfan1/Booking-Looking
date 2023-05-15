@@ -55,7 +55,7 @@ struct YearMonth: Hashable {
     let month: Int
 }
 
-func groupDatesByMonthAndYear(_ dates: [Date]) -> [(month: String, year: Int, dates: [Int])] {
+func groupDatesByMonthAndYear(_ dates: [Date]) -> [[String: Any]] {
     var dateGroups: [YearMonth: [Int]] = [:]
     let calendar = Calendar.current
 
@@ -72,6 +72,6 @@ func groupDatesByMonthAndYear(_ dates: [Date]) -> [(month: String, year: Int, da
 
     return dateGroups.map { (yearMonth, days) in
         let monthName = monthNameFromNumberEng(yearMonth.month)
-        return (month: monthName, year: yearMonth.year, dates: days)
+        return ["month": monthName, "year": yearMonth.year, "date": days]
     }
 }
