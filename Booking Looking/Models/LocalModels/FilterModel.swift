@@ -14,5 +14,14 @@ struct Filter {
     var capacity: Int?
     var priceTo: Int?
     var priceFrom: Int?
+    
+    static var empty: Filter {
+        Filter(type: nil,
+               rooms: nil,
+               beds: nil,
+               capacity: nil,
+               priceTo: nil,
+               priceFrom: nil)
+    }
 }
 

@@ -7,14 +7,7 @@
 
 import Foundation
 
-// MARK: - User
-struct UserData: Codable {
-    let data: User?
-    let message: String?
-}
-
-// MARK: - DataClass
-struct User: Codable {
+struct ServerUser: Codable {
     let email, name, surname: String?
     let sex: Int?
     let phoneNumber: String?

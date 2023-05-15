@@ -6,7 +6,8 @@
 //
 
 import Foundation
-struct UserModel:Identifiable{
+
+struct UserModel: Identifiable{
     let id: Int
     let email: String
     let name: String
@@ -14,14 +15,22 @@ struct UserModel:Identifiable{
     let sex: Int
     let phoneNumber: String
     
+    init(email: String, name: String, surname: String, sex: Int, phoneNumber: String) {
+        self.id = UUID().hashValue
+        self.email = email
+        self.name = name
+        self.surname = surname
+        self.sex = sex
+        self.phoneNumber = phoneNumber
+    }
+    
     var fullName: String{
         name + " " + surname
     }
 }
 extension UserModel{
     static func mock() -> Self {
-        UserModel(id: 1,
-                  email: "test@gmail.com",
+        UserModel(email: "test@gmail.com",
                   name: "Test",
                   surname: "Tester",
                   sex: 1,

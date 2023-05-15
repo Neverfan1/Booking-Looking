@@ -582,8 +582,7 @@
 				D001D7352A0BAEFC00B44C63 /* Mappers */,
 				D059B3022A11539600D85F8A /* AuthState.swift */,
 			);
-			name = Models;
-			path = "../../../../Downloads/Telegram Desktop/Booking Looking/Models";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D001D72F2A0BAEFC00B44C63 /* ServerModels */ = {
