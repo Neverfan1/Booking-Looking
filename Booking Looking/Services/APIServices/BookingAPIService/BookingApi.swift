@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum BookingApi {
-    case postDate(dates: [String:Any], id: Int)
+    case postDate(dates: [[String:Any]], id: Int)
     case deleteDate(id: Int)
 }
 
@@ -34,8 +34,11 @@ extension BookingApi: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .postDate(let dates, _):
-            return .requestCompositeParameters(bodyParameters: dates,
+        case .postDate(let dates, let id):
+            var params: [String:Any] = [:]
+            params["booking_dates"] = dates
+            params["accommodation_id"] = id
+            return .requestCompositeParameters(bodyParameters: params,
                                                bodyEncoding: JSONEncoding.default,
                                                urlParameters: [:])
         case .deleteDate:
@@ -44,7 +47,7 @@ extension BookingApi: TargetType {
     }
     
     var headers: [String : String]? {
-        nil
+        return ["Authorization": "Token \(LocalStorage.current.token)"]
     }
     
     

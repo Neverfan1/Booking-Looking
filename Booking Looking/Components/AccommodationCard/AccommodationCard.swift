@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
-
+import Combine
 
 struct AccommodationCard: View {
-    let model: AccommodationSearchModel
-
     
+    let model: AccommodationSearchModel
+    let onCellTap: PassthroughSubject<Int, Never>
     
     var body: some View {
         Button {
-
+            onCellTap.send(model.id)
         } label: {
             VStack(alignment: .center){
                 photo
@@ -31,7 +31,7 @@ struct AccommodationCard: View {
 
 private extension AccommodationCard {
     var photo: some View{
-        NetworkImage(imageURL: URL(string:model.image_preview),
+        NetworkImage(imageURL: URL(string:model.imagePreview),
                      width: UIScreen.main.bounds.width/1.2,
                      height:  UIScreen.main.bounds.height/4,
                      cornerRadius: 10)
@@ -67,7 +67,7 @@ private extension AccommodationCard {
 
 struct AccommodationCard_Previews: PreviewProvider {
     static var previews: some View {
-        AccommodationCard(model: AccommodationSearchModel.mock())
+        AccommodationCard(model: AccommodationSearchModel.mock(), onCellTap: PassthroughSubject<Int, Never>())
     }
 }
 

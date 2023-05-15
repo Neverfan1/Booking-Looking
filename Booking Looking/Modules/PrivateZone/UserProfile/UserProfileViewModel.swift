@@ -40,7 +40,7 @@ private extension UserProfileViewModel {
             })
             .filter { LocalStorage.current.ID != 0 }
             .map { [unowned self] in
-                self.apiService.getDetailInfo(id: LocalStorage.current.ID)
+                self.apiService.getDetailInfo()
                     .materialize()
             }
             .switchToLatest()

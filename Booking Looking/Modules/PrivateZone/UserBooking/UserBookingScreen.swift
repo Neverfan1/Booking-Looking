@@ -15,12 +15,14 @@ struct UserBooking: View {
         StateView(state: viewModel.output.screenState,
                   onAppear: viewModel.input.onAppear,
                   content: content)
+        .alert(isPresented: $viewModel.output.isShowingAlert,
+               content: alertContent)
     }
 }
 
 private extension UserBooking {
     func content() -> some View {
-        ScrollView {
+        ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 20) {
                 ForEach(viewModel.output.accommodations) { accommodation in
                     
@@ -31,32 +33,33 @@ private extension UserBooking {
                         .font(.system(size: 18))
                         .padding(.bottom,5)
                     
-                    ForEach(accommodation.booking_dates) { accommodationb in
-                        VStack(alignment: .leading){
-                            HStack(alignment: .top)  {
-                                Text("Год: ")
-                                    .bold()
-                                Text(String(accommodationb.year))
-                            }
-                            .font(.system(size: 18))
-                            HStack(alignment: .top)  {
-                                Text("Месяц: ")
-                                    .bold()
-                                Text(monthNameFromNumberRu(_:)(accommodationb.month))
-                            }
-                            .font(.system(size: 18))
-                            
-                            HStack(alignment: .top)  {
-                                Text("Даты: ")
-                                    .bold()
-                                Text( accommodationb.dates.map { String($0) }.joined(separator: ", "))
-                            }
-                            .font(.system(size: 18))
-
-
-                            }
-                        Divider()
-                    }
+                    // TODO: проблема
+//                    ForEach(accommodation.booking_dates) { accommodationb in
+//                        VStack(alignment: .leading){
+//                            HStack(alignment: .top)  {
+//                                Text("Год: ")
+//                                    .bold()
+//                                Text(String(accommodationb.year))
+//                            }
+//                            .font(.system(size: 18))
+//                            HStack(alignment: .top)  {
+//                                Text("Месяц: ")
+//                                    .bold()
+//                                Text(monthNameFromNumberRu(_:)(accommodationb.month))
+//                            }
+//                            .font(.system(size: 18))
+//
+//                            HStack(alignment: .top)  {
+//                                Text("Даты: ")
+//                                    .bold()
+//                                Text( accommodationb.dates.map { String($0) }.joined(separator: ", "))
+//                            }
+//                            .font(.system(size: 18))
+//
+//
+//                            }
+//                        Divider()
+//                    }
                     
                     // TODO: route to detail
                     AppButton(style: .standart,
@@ -67,7 +70,7 @@ private extension UserBooking {
                     // TODO: delete 
                     AppButton(style: .standart,
                               title: "Удалить бронь",
-                              action: {},
+                              action: { onDeleteTap(accommodation.id) },
                               isButtonEnabled: true)
                     
                     Divider()
@@ -80,10 +83,21 @@ private extension UserBooking {
     }
 }
 
+private extension UserBooking {
+    func alertContent() -> Alert {
+        Alert(title: Text(viewModel.output.alertMessage))
+    }
+    
+    func onDeleteTap(_ value: Int) {
+        viewModel.input.onDeleteTap.send(value)
+    }
+}
+
 #if DEBUG
 struct UserBooking_Previews: PreviewProvider {
     static var previews: some View {
-        UserBooking(viewModel: UserBookingViewModel(apiService: UserApiService()))
+        UserBooking(viewModel: UserBookingViewModel(apiService: UserApiService(),
+                                                    bookingApiService: BookingApiService()))
     }
 }
 #endif

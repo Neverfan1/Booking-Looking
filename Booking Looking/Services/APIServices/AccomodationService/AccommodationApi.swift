@@ -35,19 +35,19 @@ extension AccommodationApi: TargetType {
             if let type = type {
                 params["type"] = type
             }
-            if let type = type {
+            if let rooms = rooms {
                 params["rooms"] = rooms
             }
-            if let type = type {
+            if let beds = beds {
                 params["beds"] = beds
             }
-            if let type = type {
+            if let capacity = capacity {
                 params["capacity"] = capacity
             }
-            if let type = type {
+            if let priceTo = priceTo {
                 params["priceTo"] = priceTo
             }
-            if let type = type {
+            if let priceFrom = priceFrom {
                 params["priceFrom"] = priceFrom
             }
             params["offset"] = offset
@@ -60,7 +60,7 @@ extension AccommodationApi: TargetType {
     }
     
     var headers: [String : String]? {
-        nil
+        return ["Authorization": "Token \(LocalStorage.current.token)"]
     }
     
     

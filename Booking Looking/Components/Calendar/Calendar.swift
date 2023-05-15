@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    let freeDate: DateResponse
+    let freeDate: DateModel
     @Binding var selectedDates: [Date]
     
     var body: some View {
@@ -67,7 +67,7 @@ struct CalendarView: View {
         }
     }
     
-    private func dateFromFreeDateAndDay(freeDate: DateResponse, day: Int) -> Date? {
+    private func dateFromFreeDateAndDay(freeDate: DateModel, day: Int) -> Date? {
         var components = DateComponents()
         components.year = freeDate.year
         components.month = freeDate.month
@@ -77,12 +77,15 @@ struct CalendarView: View {
     }
 }
 
+#if DEBUG
 struct CalendarView_Previews: PreviewProvider {
     @State static var dates: [Date] = []
     
     static var previews: some View {
-        CalendarView(freeDate: DateResponse(month: 5, year: 2023, dates: [1,2,3,4,5,6,7]), selectedDates: $dates)
+        CalendarView(freeDate: DateModel(month: 5, year: 2023, dates: [1,2,3,4,5,6,7]),
+                     selectedDates: $dates)
     }
 }
+#endif
 
 

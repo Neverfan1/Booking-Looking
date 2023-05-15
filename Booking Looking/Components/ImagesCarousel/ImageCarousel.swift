@@ -12,10 +12,6 @@ struct ImageCarousel: View {
     let accommodationPhoto: [String]
     @State private var selectedImageIndex = 0
     
-    init(accommodationPhoto: [String]) {
-        self.accommodationPhoto = accommodationPhoto
-    }
-    
     var body: some View {
         VStack{
             TabView(selection: $selectedImageIndex) {

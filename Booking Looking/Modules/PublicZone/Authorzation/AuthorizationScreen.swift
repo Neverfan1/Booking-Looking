@@ -12,6 +12,13 @@ struct LoginView: View {
     @StateObject var viewModel: AuthorizationViewModel
     
     var body: some View {
+        StateView(state: viewModel.output.screenState,
+                  content: content)
+    }
+}
+
+private extension LoginView {
+    func content() -> some View {
         VStack {
             topLogo
             emailField
@@ -27,9 +34,7 @@ struct LoginView: View {
                       isButtonEnabled: true)
         }
     }
-}
-
-private extension LoginView {
+    
     var topLogo: some View{
         Image("logo")
             .renderingMode(.original)

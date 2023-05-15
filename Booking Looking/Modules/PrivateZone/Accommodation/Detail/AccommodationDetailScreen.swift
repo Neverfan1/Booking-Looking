@@ -15,11 +15,6 @@ struct AccommodationDetail: View {
         StateView(state: viewModel.output.screenState,
                   onAppear: viewModel.input.onAppear,
                   content: content)
-        .sheet(isPresented: $viewModel.output.showingCalendar) {
-            BookingView(freeDates: viewModel.output.accommodation.freeDates) {
-                viewModel.output.showingCalendar = false
-            }
-        }
     }
 }
 
@@ -160,6 +155,6 @@ private extension AccommodationDetail {
 struct AccommodationDetail_Previews: PreviewProvider {
     static var previews: some View {
         AccommodationDetail(viewModel: AccommodationDetailViewModel(id: 1,
-                                                                    apiService: AccommodationApiService()))
+                                                                    apiService: AccommodationApiService(), router: nil))
     }
 }

@@ -11,6 +11,7 @@ import CombineExt
 
 final class AccommodationDetailViewModel: ObservableObject {
     // MARK: - Services
+    weak var router: AccommodationDetailRouter?
     private let apiService: ADetailApiProtocol
     
     // MARK: - Variables
@@ -22,9 +23,12 @@ final class AccommodationDetailViewModel: ObservableObject {
     // MARK: - External
     private let id: Int
     
-    init(id: Int, apiService: ADetailApiProtocol) {
+    init(id: Int,
+         apiService: ADetailApiProtocol,
+         router: AccommodationDetailRouter?) {
         self.id = id
         self.apiService = apiService
+        self.router = router
         
         self.input = Input()
         self.output = Output()
@@ -70,7 +74,9 @@ private extension AccommodationDetailViewModel {
     func bindOnDateTap() {
         input.onDateTap
             .sink { [weak self] in
-                self?.output.showingCalendar.toggle()
+                guard let self = self else { return }
+                self.router?.modalToBooking(args: (self.output.accommodation.freeDates,
+                                                   self.output.accommodation.id))
             }
             .store(in: &cancellable)
     }
@@ -85,6 +91,5 @@ extension AccommodationDetailViewModel {
     struct Output {
         var screenState: ProcessingState = .loading
         var accommodation: AccommodationDetailModel = .mock()
-        var showingCalendar = false
     }
 }

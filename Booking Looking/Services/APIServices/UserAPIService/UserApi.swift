@@ -9,15 +9,15 @@ import Foundation
 import Moya
 
 enum UserApi {
-    case getDetail(id: Int)
+    case getDetail
     case getBooking
 }
 
 extension UserApi: TargetType {
     var path: String {
         switch self {
-        case .getDetail(let id):
-            return "/user-detail/\(id)"
+        case .getDetail:
+            return "/user-detail"
         case .getBooking:
             return "/user-booking"
         }
@@ -32,6 +32,6 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-        nil
+        ["Authorization": "Token \(LocalStorage.current.token)"]
     }
 }

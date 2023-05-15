@@ -12,14 +12,9 @@ struct SearchAccommodation: View {
     @StateObject var viewModel: SearchAccommodationViewModel
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(viewModel.output.accommodations) { accommodation in
-                    AccommodationCard(model: accommodation)
-                }
-            }
-            .padding()
-        }
+        StateView(state: viewModel.output.screenState,
+                  onAppear: viewModel.input.onAppear,
+                  content: content)
         .navigationBarItems(trailing: trailingButton)
         .sheet(isPresented: $viewModel.output.showingFilter) {
             FilterView(filter: $viewModel.output.filterSettings,
@@ -30,6 +25,18 @@ struct SearchAccommodation: View {
 }
 
 private extension SearchAccommodation {
+    func content() -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                ForEach(viewModel.output.accommodations) { accommodation in
+                    AccommodationCard(model: accommodation,
+                                      onCellTap: viewModel.input.onCellTap)
+                }
+            }
+            .padding()
+        }
+    }
+    
     var trailingButton: some View {
         Button(action: onTrailingTap) {
             Text("Filter")
@@ -50,7 +57,7 @@ private extension SearchAccommodation {
 #if DEBUG
 struct SearchAccommodation_Previews: PreviewProvider {
     static var previews: some View {
-        SearchAccommodation(viewModel: SearchAccommodationViewModel(apiService: AccommodationApiService()))
+        SearchAccommodation(viewModel: SearchAccommodationViewModel(apiService: AccommodationApiService(), router: nil))
     }
 }
 #endif

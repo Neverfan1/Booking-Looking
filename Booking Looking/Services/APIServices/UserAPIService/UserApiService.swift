@@ -11,7 +11,7 @@ import CombineMoya
 
 // MARK: - Protocols
 protocol ProfileApiProtocol {
-    func getDetailInfo(id: Int) -> AnyPublisher<UserModel, APIError>
+    func getDetailInfo() -> AnyPublisher<UserModel, APIError>
 }
 
 protocol ProfileBookingApiProtocol {
@@ -24,8 +24,8 @@ struct UserApiService {
 
 // MARK: - API-methods
 extension UserApiService: ProfileApiProtocol {
-    func getDetailInfo(id: Int) -> AnyPublisher<UserModel, APIError> {
-        provider.requestPublisher(.getDetail(id: id))
+    func getDetailInfo() -> AnyPublisher<UserModel, APIError> {
+        provider.requestPublisher(.getDetail)
             .filterSuccessfulStatusCodes()
             .map(ServerResponse<ServerUser>.self)
             .map { $0.data }

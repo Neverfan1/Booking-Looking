@@ -109,7 +109,7 @@ private extension RegistrationViewModel {
         request
             .values()
             .sink { [weak self] response in
-                LocalStorage.current.ID = Int(response.userId)
+                LocalStorage.current.ID = response.userId
                 self?.router?.pushToCode()
             }
             .store(in: &cancellable)

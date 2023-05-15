@@ -6,43 +6,48 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BookingView: View {
-    let freeDates: [DateModel]
-    @State var selectedDates: [Date] = []
     
-    var onBooking: () -> Void
-    
+    @StateObject var viewModel: BookingViewModel
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    ForEach(freeDates, id: \.self) { freeDate in
-                        CalendarView(freeDate: freeDate,
-                                     selectedDates: $selectedDates)
-                    }
-                    
-                    AppButton(style: .standart,
-                              title: "Забронировать",
-                              action: {
-                                print(groupDatesByMonthAndYear(selectedDates))
-                                onBooking()
-                              },
-                              isButtonEnabled: true)
-                    
-                }
-            }
+        StateView(state: viewModel.output.screenState,
+                  content: content)
             .navigationBarTitle("Бронирование", displayMode: .inline)
+    }
+}
+
+private extension BookingView {
+    func content() -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(viewModel.output.freeDates, id: \.self) { freeDate in
+                    CalendarView(freeDate: freeDate,
+                                 selectedDates: $viewModel.output.selectedDates)
+                }
+                
+                AppButton(style: .standart,
+                          title: "Забронировать",
+                          action: buttonTap,
+                          isButtonEnabled: true)
+            }
         }
+    }
+}
+
+private extension BookingView {
+    func buttonTap() {
+        print(groupDatesByMonthAndYear(viewModel.output.selectedDates))
     }
 }
 
 struct BookingView_Previews: PreviewProvider {
     static var previews: some View {
-        BookingView( freeDates: [DateModel(month: 5, year: 2023, dates: [1,2,3,4,5,6,7]),
-                                 DateModel(month: 6, year: 2023, dates: [4,7,9,10,11,12,13,14,20,26,27,28]),
-                                 DateModel(month: 7, year: 2023, dates: [17,19,20,21,22,23,24,25,26,30])], onBooking: {}
-                     )
+        BookingView(viewModel: BookingViewModel(id: 1,
+                                                freeDates: [.init(month: 1, year: 2023, dates: [1,2,3])],
+                                                apiService: BookingApiService(),
+                                                router: nil))
     }
 }

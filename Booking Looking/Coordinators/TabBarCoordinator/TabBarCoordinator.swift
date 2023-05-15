@@ -13,26 +13,22 @@ import Combine
 final class TabBarCoordinator: TabCoordinatable {
     var child = TabChild(
         startingItems: [
-            \TabBarCoordinator.groups
-//             \TabBarCoordinator.photos,
-//             \TabBarCoordinator.friends,
-//             \TabBarCoordinator.exit,
-             
+            \TabBarCoordinator.groups,
+             \TabBarCoordinator.accommodations
         ]
     )
     
     @Route(tabItem: makeGroupsTab) var groups = makeGroups
-//    @Route(tabItem: makePhotosTab) var photos = makePhotos
-//    @Route(tabItem: makeFriendsTab) var friends = makeFriends
-//    @Route(tabItem: makeExitTab) var exit = makeExit
+    @Route(tabItem: makeAccommodationsTab) var accommodations = makeAccommodations
     
+    #if DEBUG
     deinit {
         print("Deinit AuthenticatedCoordinator")
     }
+    #endif
 }
 
 extension TabBarCoordinator {
-    
     func makeGroups() -> NavigationViewCoordinator<UserCoordinator> {
         NavigationViewCoordinator(UserCoordinator())
     }
@@ -42,9 +38,14 @@ extension TabBarCoordinator {
         Text("Profile")
     }
     
+    func makeAccommodations() -> NavigationViewCoordinator<AccommodationCoordinator> {
+        NavigationViewCoordinator(AccommodationCoordinator())
+    }
 
-
-    
+    @ViewBuilder func makeAccommodationsTab(isActive: Bool) -> some View {
+        Image(systemName: "house")
+        Text("Жилища")
+    }
     
 }
 

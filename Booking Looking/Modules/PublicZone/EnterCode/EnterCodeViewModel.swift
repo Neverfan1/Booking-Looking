@@ -59,8 +59,8 @@ private extension EnterCodeViewModel {
         let request = input.onConfirmTap
             .filter { id != 0 }
             .map { [unowned self] in
-                return self.apiService.checkCode(user: id,
-                                                 code: self.output.code)
+                self.apiService.checkCode(user: id,
+                                          code: self.output.code)
                 .materialize()
             }
             .switchToLatest()
@@ -77,12 +77,9 @@ private extension EnterCodeViewModel {
             .values()
             .sink { [weak self] in
                 LocalStorage.current.token = $0.token
-                
-                guard let userId = Int($0.userId) else { return }
-                
-                LocalStorage.current.ID = userId
+                LocalStorage.current.ID = $0.userId
                 LocalStorage.current.isComplited = true
-                
+                print("closed")
                 self?.router?.close()
             }
             .store(in: &cancellable)

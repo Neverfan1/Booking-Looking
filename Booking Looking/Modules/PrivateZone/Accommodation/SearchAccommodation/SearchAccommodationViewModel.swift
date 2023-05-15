@@ -11,6 +11,7 @@ import CombineExt
 
 final class SearchAccommodationViewModel: ObservableObject {
     // MARK: - Services
+    weak var router: SearchAccommodationRouter?
     private let apiService: AFilterApiProtocol
     
     // MARK: - Variables
@@ -23,8 +24,10 @@ final class SearchAccommodationViewModel: ObservableObject {
     private var offset = 0
     private var count = 10
     
-    init(apiService: AFilterApiProtocol) {
+    init(apiService: AFilterApiProtocol,
+         router: SearchAccommodationRouter?) {
         self.apiService = apiService
+        self.router = router
         
         self.input = Input()
         self.output = Output()
@@ -37,6 +40,9 @@ private extension SearchAccommodationViewModel {
     func bind() {
         bindOnAppear()
         bindOnUpdate()
+        bindOnCellTap()
+        bindTrailingTap()
+        bindFilterSettings()
     }
     
     func bindOnAppear() {
@@ -110,6 +116,14 @@ private extension SearchAccommodationViewModel {
             .store(in: &cancellable)
     }
     
+    func bindOnCellTap() {
+        input.onCellTap
+            .sink { [weak self] in
+                self?.router?.pushToDetails(id: $0)
+            }
+            .store(in: &cancellable)
+    }
+    
     func bindTrailingTap() {
         input.onTrailingTap
             .sink { [weak self] in
@@ -126,6 +140,7 @@ private extension SearchAccommodationViewModel {
             .delay(for: 0.25, scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.output.showingFilter = false
+                self?.input.onAppear.send()
             }
             .store(in: &cancellable)
     }
@@ -135,7 +150,7 @@ extension SearchAccommodationViewModel {
     struct Input {
         let onAppear = PassthroughSubject<Void, Never>()
         let onUpdate = PassthroughSubject<Void, Never>()
-        
+        let onCellTap = PassthroughSubject<Int, Never>()
         let onTrailingTap = PassthroughSubject<Void, Never>()
         let onSettingsUpdate = PassthroughSubject<Filter, Never>()
     }

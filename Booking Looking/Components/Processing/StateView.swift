@@ -43,9 +43,9 @@ private extension StateView {
     }
     
     func errorView(message: String) -> some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .center, spacing: 12) {
             Text(message)
-                .font(.title)
+                .font(.headline)
             
             Button(action: onAppearSend) {
                 Text("Повторить")

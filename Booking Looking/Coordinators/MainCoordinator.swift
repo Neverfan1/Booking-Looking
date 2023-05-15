@@ -12,7 +12,7 @@ import Combine
 
 final class MainCoordinator: NavigationCoordinatable {
 
-    var stack = Stinsen.NavigationStack<MainCoordinator>(initial: \.authorization)
+    var stack: Stinsen.NavigationStack<MainCoordinator>
 
     @Root var authorization = makeAuthorization
     @Root var general = makeTabBar
