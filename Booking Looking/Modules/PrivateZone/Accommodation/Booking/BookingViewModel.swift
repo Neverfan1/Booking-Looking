@@ -13,6 +13,7 @@ final class BookingViewModel: ObservableObject {
     // MARK: - Services
     weak var router: BookingRouter?
     private let apiService: BookingPostApiProtocol
+    private let onUpdate: PassthroughSubject<Void, Never>
     
     // MARK: - Variables
     let input: Input
@@ -23,8 +24,10 @@ final class BookingViewModel: ObservableObject {
     init(id: Int,
          freeDates: [DateModel],
          apiService: BookingPostApiProtocol,
+         onUpdate: PassthroughSubject<Void, Never>,
          router: BookingRouter?) {
         self.apiService = apiService
+        self.onUpdate = onUpdate
         self.router = router
         
         self.input = Input()
@@ -63,7 +66,11 @@ private extension BookingViewModel {
         
         request
             .values()
-            .sink { [weak self] _ in
+            .mapToVoid()
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.onUpdate.send()
+            })
+            .sink { [weak self] in
                 self?.router?.pop()
             }
             .store(in: &cancellable)

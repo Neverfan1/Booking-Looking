@@ -51,7 +51,7 @@ struct BookingView_Previews: PreviewProvider {
     static var previews: some View {
         BookingView(viewModel: BookingViewModel(id: 1,
                                                 freeDates: [.init(month: 1, year: 2023, dates: [1,2,3])],
-                                                apiService: BookingApiService(),
+                                                apiService: BookingApiService(), onUpdate: PassthroughSubject<Void, Never>(),
                                                 router: nil))
     }
 }

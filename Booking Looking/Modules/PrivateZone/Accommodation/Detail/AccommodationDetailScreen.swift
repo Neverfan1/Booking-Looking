@@ -156,9 +156,12 @@ private extension AccommodationDetail {
     }
 }
 
+#if DEBUG
+import Combine
 struct AccommodationDetail_Previews: PreviewProvider {
     static var previews: some View {
         AccommodationDetail(viewModel: AccommodationDetailViewModel(id: 1,
-                                                                    apiService: AccommodationApiService(), router: nil))
+                                                                    apiService: AccommodationApiService(), onUpdate: PassthroughSubject<Void, Never>(), router: nil))
     }
 }
+#endif

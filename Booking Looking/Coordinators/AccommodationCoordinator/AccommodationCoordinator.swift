@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Stinsen
+import Combine
 
 final class AccommodationCoordinator: NavigationCoordinatable {
     let stack = NavigationStack(initial: \AccommodationCoordinator.start)
@@ -19,6 +20,8 @@ final class AccommodationCoordinator: NavigationCoordinatable {
     private let accomApiService = AccommodationApiService()
     private let bookingApiService = BookingApiService()
     private let ownerService = OwnerApiService()
+    
+    private let onUpdate = PassthroughSubject<Void, Never>()
     
 #if DEBUG
     deinit {
@@ -37,6 +40,7 @@ extension AccommodationCoordinator {
     @ViewBuilder func makeDetail(id: Int) -> some View {
         let viewModel = AccommodationDetailViewModel(id: id,
                                                      apiService: accomApiService,
+                                                     onUpdate: onUpdate,
                                                      router: self)
         AccommodationDetail(viewModel: viewModel)
     }
@@ -45,6 +49,7 @@ extension AccommodationCoordinator {
         let viewModel = BookingViewModel(id: args.1,
                                          freeDates: args.0,
                                          apiService: bookingApiService,
+                                         onUpdate: onUpdate,
                                          router: self)
         BookingView(viewModel: viewModel)
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AccommodationModel: Identifiable {
+struct AccommodationModel: Identifiable, Hashable {
     let id: Int
     let bookingID: Int
     let type: String

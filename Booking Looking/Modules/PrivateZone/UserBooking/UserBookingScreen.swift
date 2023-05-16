@@ -41,7 +41,7 @@ private extension UserBooking {
     var successContent: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 20) {
-                ForEach(viewModel.output.accommodations) { accommodation in
+                ForEach(viewModel.output.accommodations, id: \.self) { accommodation in
                     
                     ImageCarousel(accommodationPhoto: accommodation.images)
                     
