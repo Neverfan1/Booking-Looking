@@ -31,10 +31,19 @@ extension OwnerApiService: OwnerDetailApiProtocol {
             .map(ServerResponse<ServerOwnerModel>.self)
             .map { $0.data }
             .map { OwnerModelMapper().toLocal(serverEntity: $0) }
-            .mapError { error in
-                print(error)
-                return .DifferentCode
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
             }
+
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -47,10 +56,19 @@ extension OwnerApiService: OwnerAccomApiProtocol {
             .map(ServerResponse<[ServerSearchBooking]>.self)
             .map { $0.data }
             .map { AccommodationSearchMapper().toLocal(list: $0) }
-            .mapError { error in
-                print(error)
-                return .DifferentCode
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
             }
+
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

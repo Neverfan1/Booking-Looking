@@ -16,7 +16,7 @@ struct OwnerProfileScreen: View {
         StateView(state: viewModel.output.screenState,
                   onAppear: viewModel.input.onAppear,
                   content: content)
-        .navigationTitle("Профиль пользователя")
+        .navigationTitle("Профиль владельца")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -35,9 +35,13 @@ extension OwnerProfileScreen{
                     contactOwner
                 }
                 .font(.system(size: 18))
+                Divider()
                 
-                Text("Все жилища хозяина")
+                Text("Все жилища владельца")
                     .padding(.top, 50)
+                    .font(.title)
+                    .fontWeight(.bold)
+
                 
                 accomCells
             }

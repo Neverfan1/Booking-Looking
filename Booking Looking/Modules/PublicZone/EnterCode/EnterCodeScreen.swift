@@ -15,8 +15,16 @@ struct EnterCodeScreen: View {
     @State private var isButtonEnabled = false
     @FocusState private var focusedField: Int?
     private let codeFieldIndices = Array(0..<4)
-
+    
     var body: some View {
+        StateView(state: viewModel.output.screenState,
+                  content: content)
+    }
+}
+
+
+extension EnterCodeScreen{
+    func content() -> some View {
         VStack(spacing: 20) {
             topLogo
             codeCells
@@ -35,10 +43,7 @@ struct EnterCodeScreen: View {
         }
         .padding()
     }
-}
-
-
-extension EnterCodeScreen{
+    
     var topLogo: some View{
         Image("logo")
             .renderingMode(.original)

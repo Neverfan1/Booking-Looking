@@ -33,12 +33,18 @@ extension AccommodationApiService: ADetailApiProtocol {
             .map {
                 AccommodationDetailMapper().toLocal(serverEntity: $0)
             }
-            .mapError({ error in
-                #if DEBUG
-                print(error)
-                #endif
-                return .ValueError
-            })
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -53,12 +59,18 @@ extension AccommodationApiService: AFilterApiProtocol {
             .map {
                 AccommodationSearchMapper().toLocal(list: $0)
             }
-            .mapError({ error in
-                #if DEBUG
-                print(error)
-                #endif
-                return .ValueError
-            })
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

@@ -28,12 +28,19 @@ extension BookingApiService: BookingPostApiProtocol {
         provider.requestPublisher(.postDate(dates: dates, id: id))
             .filterSuccessfulStatusCodes()
             .mapToValue("Жилье забронировано")
-            .mapError({ error in
-                #if DEBUG
-                print(error)
-                #endif
-                return .DateError
-            })
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
+            }
+
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -44,12 +51,19 @@ extension BookingApiService: BookingDeleteApiProtocol {
         provider.requestPublisher(.deleteDate(id: id))
             .filterSuccessfulStatusCodes()
             .mapToValue("Бронь отменена")
-            .mapError({ error in
-                #if DEBUG
-                print(error)
-                #endif
-                return .DateError
-            })
+            .mapError { error -> APIError in
+                if let responseData = error.response?.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        return .serverError(message: errorResponse.message, errorCode: errorResponse.errorCode)
+                    } catch {
+                        print("Decoding error: \(error)")
+                    }
+                }
+                print("Other error: \(error)")
+                return .serverError(message: "Неизвестная ошибка", errorCode: -1)
+            }
+
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

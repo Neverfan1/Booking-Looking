@@ -19,19 +19,21 @@ struct LoginView: View {
 
 private extension LoginView {
     func content() -> some View {
-        VStack {
-            topLogo
-            emailField
-            
-            AppButton(style: .standart,
-                      title: "Войти",
-                      action: onSignInTap,
-                      isButtonEnabled: isFormValid)
-            
-            AppButton(style: .standart,
-                      title: "Регистрация",
-                      action: onSignUpTap,
-                      isButtonEnabled: true)
+        ScrollView{
+            VStack {
+                topLogo
+                emailField
+                
+                AppButton(style: .standart,
+                          title: "Войти",
+                          action: onSignInTap,
+                          isButtonEnabled: isFormValid)
+                
+                AppButton(style: .standart,
+                          title: "Регистрация",
+                          action: onSignUpTap,
+                          isButtonEnabled: true)
+            }
         }
     }
     

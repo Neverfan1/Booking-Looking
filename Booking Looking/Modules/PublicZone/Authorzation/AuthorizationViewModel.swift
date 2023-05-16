@@ -44,9 +44,9 @@ private extension AuthorizationViewModel {
     
     func bindSignInTap() {
         let request = input.onSignInTap
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.output.screenState = .loading
-            })
+//            .handleEvents(receiveOutput: { [weak self] in
+//                self?.output.screenState = .loading
+//            })
             .map { [unowned self] in
                 self.apiService.authorize(email: self.output.email)
                     .materialize()

@@ -11,3 +11,14 @@ struct ServerResponse<T: Codable>: Codable {
     let data: T
     let message: String
 }
+
+// Error response model
+struct ErrorResponse: Decodable {
+    let errorCode: Int
+    let message: String
+    
+    enum CodingKeys: String, CodingKey {
+        case errorCode = "error_code"
+        case message
+    }
+}
