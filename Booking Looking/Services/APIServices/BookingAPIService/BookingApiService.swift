@@ -27,7 +27,6 @@ extension BookingApiService: BookingPostApiProtocol {
     func postDate(dates: [[String:Any]], id: Int) -> AnyPublisher<String, APIError> {
         provider.requestPublisher(.postDate(dates: dates, id: id))
             .filterSuccessfulStatusCodes()
-            .map(ServerResponse<String>.self)
             .mapToValue("Жилье забронировано")
             .mapError({ error in
                 #if DEBUG
@@ -44,7 +43,6 @@ extension BookingApiService: BookingDeleteApiProtocol {
     func deleteDate(id: Int) -> AnyPublisher<String, APIError> {
         provider.requestPublisher(.deleteDate(id: id))
             .filterSuccessfulStatusCodes()
-            .map(ServerResponse<String>.self)
             .mapToValue("Бронь отменена")
             .mapError({ error in
                 #if DEBUG

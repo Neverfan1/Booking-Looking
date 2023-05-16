@@ -18,9 +18,9 @@ extension AccommodationApi: TargetType {
     var path: String {
         switch self {
         case .filter:
-            return "accommodation-filter"
+            return "accommodation-filter/"
         case .detail(let id):
-            return "accommodation-detail/\(id)"
+            return "accommodation-detail/\(id)/"
         }
     }
     
@@ -45,10 +45,10 @@ extension AccommodationApi: TargetType {
                 params["capacity"] = capacity
             }
             if let priceTo = priceTo {
-                params["priceTo"] = priceTo
+                params["price_to"] = priceTo
             }
             if let priceFrom = priceFrom {
-                params["priceFrom"] = priceFrom
+                params["price_from"] = priceFrom
             }
             params["offset"] = offset
             params["count"] = count
@@ -60,7 +60,7 @@ extension AccommodationApi: TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Authorization": "Token \(LocalStorage.current.token)"]
+        ["Authorization": "Token \(LocalStorage.current.token)"]
     }
     
     

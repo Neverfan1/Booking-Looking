@@ -13,12 +13,14 @@ import Combine
 final class TabBarCoordinator: TabCoordinatable {
     var child = TabChild(
         startingItems: [
-            \TabBarCoordinator.groups,
+             \TabBarCoordinator.groups,
+             \TabBarCoordinator.userBookings,
              \TabBarCoordinator.accommodations
         ]
     )
     
     @Route(tabItem: makeGroupsTab) var groups = makeGroups
+    @Route(tabItem: makeUserBookingsTab) var userBookings = makeUserBookings
     @Route(tabItem: makeAccommodationsTab) var accommodations = makeAccommodations
     
     #if DEBUG
@@ -35,18 +37,26 @@ extension TabBarCoordinator {
     
     @ViewBuilder func makeGroupsTab(isActive: Bool) -> some View {
         Image(systemName: "person.3")
-        Text("Profile")
+        Text("Профиль")
     }
     
     func makeAccommodations() -> NavigationViewCoordinator<AccommodationCoordinator> {
         NavigationViewCoordinator(AccommodationCoordinator())
     }
 
+    func makeUserBookings() -> NavigationViewCoordinator<UserBookingCoordinator> {
+        NavigationViewCoordinator(UserBookingCoordinator())
+    }
+
+    @ViewBuilder func makeUserBookingsTab(isActive: Bool) -> some View {
+        Image(systemName: "dollarsign.arrow.circlepath")
+        Text("Брони")
+    }
+    
     @ViewBuilder func makeAccommodationsTab(isActive: Bool) -> some View {
         Image(systemName: "house")
         Text("Жилища")
     }
-    
 }
 
 

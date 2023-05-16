@@ -16,6 +16,7 @@ struct UserView: View {
                   onAppear: viewModel.input.onAppear,
                   content: content)
         .navigationTitle("Профиль пользователя")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 extension UserView{

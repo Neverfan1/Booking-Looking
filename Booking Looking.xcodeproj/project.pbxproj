@@ -79,6 +79,7 @@
 		D044D4132A0E4F5B00F06177 /* TargetType + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4122A0E4F5B00F06177 /* TargetType + Extensions.swift */; };
 		D044D4162A0E583E00F06177 /* BookingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4152A0E583E00F06177 /* BookingApi.swift */; };
 		D044D4182A0E584500F06177 /* BookingApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044D4172A0E584500F06177 /* BookingApiService.swift */; };
+		D050F63E2A135D7600F44B61 /* UserBookingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F63D2A135D7600F44B61 /* UserBookingCoordinator.swift */; };
 		D059B2F52A1139FF00D85F8A /* ProcessingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F42A1139FF00D85F8A /* ProcessingState.swift */; };
 		D059B2F72A113A4200D85F8A /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F62A113A4200D85F8A /* StateView.swift */; };
 		D059B2F92A11414000D85F8A /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B2F82A11414000D85F8A /* RegistrationRouter.swift */; };
@@ -161,6 +162,7 @@
 		D044D4122A0E4F5B00F06177 /* TargetType + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetType + Extensions.swift"; sourceTree = "<group>"; };
 		D044D4152A0E583E00F06177 /* BookingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingApi.swift; sourceTree = "<group>"; };
 		D044D4172A0E584500F06177 /* BookingApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingApiService.swift; sourceTree = "<group>"; };
+		D050F63D2A135D7600F44B61 /* UserBookingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingCoordinator.swift; sourceTree = "<group>"; };
 		D059B2F42A1139FF00D85F8A /* ProcessingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingState.swift; sourceTree = "<group>"; };
 		D059B2F62A113A4200D85F8A /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		D059B2F82A11414000D85F8A /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				D03538682A124F8A007D2918 /* AccommodationCoordinator */,
 				D001D6DA2A0B8FA600B44C63 /* UserCoordinator */,
+				D050F63C2A135D6200F44B61 /* UserBookingCoordinator */,
 				D001D6D72A0B8F9D00B44C63 /* TabBarCoordinator */,
 				D001D6D42A0B8F8700B44C63 /* Authorzation */,
 				B5DA329629F1CAF700DD2F2B /* MainCoordinator.swift */,
@@ -690,6 +693,14 @@
 			path = BookingAPIService;
 			sourceTree = "<group>";
 		};
+		D050F63C2A135D6200F44B61 /* UserBookingCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D050F63D2A135D7600F44B61 /* UserBookingCoordinator.swift */,
+			);
+			path = UserBookingCoordinator;
+			sourceTree = "<group>";
+		};
 		D059B2F32A1139E500D85F8A /* Processing */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +855,7 @@
 				D001D7152A0B946800B44C63 /* BookingModal.swift in Sources */,
 				D044D40C2A0E3C6000F06177 /* Array + Extensions.swift in Sources */,
 				D044D4062A0E2C4700F06177 /* ServerBooking.swift in Sources */,
+				D050F63E2A135D7600F44B61 /* UserBookingCoordinator.swift in Sources */,
 				D059B3072A115CEA00D85F8A /* UserBookingViewModel.swift in Sources */,
 				D001D6FA2A0B934000B44C63 /* TabBar.swift in Sources */,
 				D001D6FF2A0B942B00B44C63 /* ColorTheme.swift in Sources */,
@@ -916,7 +928,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -970,7 +982,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

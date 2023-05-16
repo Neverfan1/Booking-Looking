@@ -35,7 +35,6 @@ private extension UserBookingViewModel {
     func bind() {
         bindOnAppear()
         bindOnDelete()
-        bindOnDetail()
     }
     
     func bindOnAppear() {
@@ -70,7 +69,8 @@ private extension UserBookingViewModel {
     func bindOnDelete() {
         let request = input.onDeleteTap
             .map { [unowned self] in
-                self.bookingApiService.deleteDate(id: $0)
+                print("BOOKINGIDHERE: \($0)")
+                return self.bookingApiService.deleteDate(id: $0)
                     .materialize()
             }
             .switchToLatest()
@@ -88,13 +88,11 @@ private extension UserBookingViewModel {
             .sink { [weak self] in
                 self?.output.alertMessage = $0
                 self?.output.isShowingAlert = true
+                self?.input.onAppear.send()
             }
             .store(in: &cancellable)
     }
     
-    func bindOnDetail() {
-        
-    }
 }
 
 extension UserBookingViewModel {

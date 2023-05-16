@@ -24,9 +24,9 @@ final class UserAccommodationModelMapper: BaseModelMapper<ServerUserBooking, Acc
 
 final class DateModelMapper: BaseModelMapper<ServerDate, DateModel> {
     override func toLocal(serverEntity: ServerDate) -> DateModel {
-        DateModel(month: serverEntity.month ?? -1,
+        DateModel(month: monthToInt(month: serverEntity.month.orEmpty),
                   year: serverEntity.year ?? -1,
-                  dates: serverEntity.dates.orEmpty)
+                  dates: serverEntity.date.orEmpty)
     }
 }
 
@@ -48,7 +48,7 @@ final class AccommodationDetailMapper: BaseModelMapper<ServerDetailBooking, Acco
                                  address: serverEntity.address.orEmpty,
                                  description: serverEntity.description.orEmpty,
                                  imagePreview: serverEntity.imagePreview.orEmpty,
-                                 images: toLocalImages(serverEntity.images),
+                                 images: serverEntity.images.orEmpty,
                                  type: serverEntity.type.orEmpty,
                                  rooms: serverEntity.rooms ?? -1,
                                  beds: serverEntity.beds ?? -1,
@@ -58,19 +58,5 @@ final class AccommodationDetailMapper: BaseModelMapper<ServerDetailBooking, Acco
                                  price: serverEntity.price ?? -1,
                                  cancellationPolicy: serverEntity.cancellationPolicy.orEmpty,
                                  freeDates: DateModelMapper().toLocal(list: serverEntity.freeDates))
-    }
-    
-    func toLocalImages(_ images: [String:String]?) -> [String] {
-        if let images {
-            var imgs: [String] = []
-            
-            for item in images.values {
-                imgs.append(item)
-            }
-            
-            return imgs
-        } else {
-            return []
-        }
     }
 }

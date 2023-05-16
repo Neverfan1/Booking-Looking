@@ -45,6 +45,7 @@ private extension LoginView {
     
     var emailField: some View{
         TextField("E-mail", text: $viewModel.output.email)
+            .autocapitalization(.none)
             .textFieldStyle(CustomTextFieldStyle())
             .padding(.bottom, 20)
             .onChange(of: viewModel.output.email,

@@ -17,9 +17,9 @@ extension UserApi: TargetType {
     var path: String {
         switch self {
         case .getDetail:
-            return "/user-detail"
+            return "/user-detail/"
         case .getBooking:
-            return "/user-booking"
+            return "/user-booking/"
         }
     }
     

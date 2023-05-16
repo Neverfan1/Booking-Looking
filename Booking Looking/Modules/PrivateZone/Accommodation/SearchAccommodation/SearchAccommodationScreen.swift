@@ -16,16 +16,36 @@ struct SearchAccommodation: View {
                   onAppear: viewModel.input.onAppear,
                   content: content)
         .navigationBarItems(trailing: trailingButton)
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $viewModel.output.showingFilter) {
-            FilterView(filter: $viewModel.output.filterSettings,
-                       onSearchUpdate: viewModel.input.onSettingsUpdate)
+            FilterView(type: $viewModel.output.type,
+                       rooms: $viewModel.output.rooms,
+                       beds: $viewModel.output.beds,
+                       capacity: $viewModel.output.capacity,
+                       priceTo: $viewModel.output.priceTo,
+                       priceFrom: $viewModel.output.priceFrom,
+                       onTypeChange: viewModel.input.onTypeChange,
+                       onRoomsChange: viewModel.input.onRoomsChange,
+                       onBedsChange: viewModel.input.onBedsChange,
+                       onCapacityChange: viewModel.input.onCapacityChange,
+                       onPriceToChange: viewModel.input.onPriceToChange,
+                       onPriceFromChange: viewModel.input.onPriceFromChange,
+                       onSettingsSave: viewModel.input.onSettingsSave)
         }
     }
-
+    
 }
 
 private extension SearchAccommodation {
-    func content() -> some View {
+    @ViewBuilder func content() -> some View {
+        if viewModel.output.accommodations.isEmpty {
+            emptyContent
+        } else {
+            successContent
+        }
+    }
+    
+    var successContent: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 ForEach(viewModel.output.accommodations) { accommodation in
@@ -35,6 +55,11 @@ private extension SearchAccommodation {
             }
             .padding()
         }
+    }
+    
+    var emptyContent: some View {
+        Text("Жилья по вашим параметрам не найдено")
+            .font(.headline)
     }
     
     var trailingButton: some View {

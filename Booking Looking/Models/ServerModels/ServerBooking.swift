@@ -33,9 +33,9 @@ struct ServerUserBooking: Codable {
 }
 
 struct ServerDate: Codable {
-    let month: Int?
+    let month: String?
     let year: Int?
-    let dates: [Int]?
+    let date: [Int]?
 }
 
 struct ServerSearchBooking: Codable {
@@ -63,7 +63,7 @@ struct ServerDetailBooking: Codable {
     let address: String?
     let description: String?
     let imagePreview: String?
-    let images: [String:String]?
+    let images: [String]?
     let type: String?
     let rooms: Int?
     let beds: Int?

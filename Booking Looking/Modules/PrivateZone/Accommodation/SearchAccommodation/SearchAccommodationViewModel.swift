@@ -75,7 +75,7 @@ private extension SearchAccommodationViewModel {
             .values()
             .sink { [weak self] in
                 self?.output.accommodations = $0
-                self?.output.screenState = .loading
+                self?.output.screenState = .loaded
             }
             .store(in: &cancellable)
     }
@@ -111,7 +111,6 @@ private extension SearchAccommodationViewModel {
             .values()
             .sink { [weak self] in
                 self?.output.accommodations += $0
-                self?.output.screenState = .loading
             }
             .store(in: &cancellable)
     }
@@ -133,10 +132,63 @@ private extension SearchAccommodationViewModel {
     }
     
     func bindFilterSettings() {
-        input.onSettingsUpdate
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.output.filterSettings = $0
-            })
+        input.onTypeChange
+            .sink { [weak self] in
+                self?.output.filterSettings.type = $0
+            }
+            .store(in: &cancellable)
+        
+        input.onRoomsChange
+            .sink { [weak self] in
+                if $0 != 0 {
+                    self?.output.filterSettings.rooms = $0
+                } else {
+                    self?.output.filterSettings.rooms = nil
+                }
+            }
+            .store(in: &cancellable)
+        
+        input.onBedsChange
+            .sink { [weak self] in
+                if $0 != 0 {
+                    self?.output.filterSettings.beds = $0
+                } else {
+                    self?.output.filterSettings.beds = nil
+                }
+            }
+            .store(in: &cancellable)
+        
+        input.onCapacityChange
+            .sink { [weak self] in
+                if $0 != 0 {
+                    self?.output.filterSettings.capacity = $0
+                } else {
+                    self?.output.filterSettings.capacity = nil
+                }
+            }
+            .store(in: &cancellable)
+        
+        input.onPriceFromChange
+            .sink { [weak self] in
+                if $0 != 0 {
+                    self?.output.filterSettings.priceFrom = $0
+                } else {
+                    self?.output.filterSettings.priceFrom = nil
+                }
+            }
+            .store(in: &cancellable)
+        
+        input.onPriceToChange
+            .sink { [weak self] in
+                if $0 != 0 {
+                    self?.output.filterSettings.priceTo = $0
+                } else {
+                    self?.output.filterSettings.priceTo = nil
+                }
+            }
+            .store(in: &cancellable)
+        
+        input.onSettingsSave
             .delay(for: 0.25, scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.output.showingFilter = false
@@ -152,12 +204,27 @@ extension SearchAccommodationViewModel {
         let onUpdate = PassthroughSubject<Void, Never>()
         let onCellTap = PassthroughSubject<Int, Never>()
         let onTrailingTap = PassthroughSubject<Void, Never>()
-        let onSettingsUpdate = PassthroughSubject<Filter, Never>()
+        
+        let onTypeChange = PassthroughSubject<String, Never>()
+        let onRoomsChange = PassthroughSubject<Int, Never>()
+        let onBedsChange = PassthroughSubject<Int, Never>()
+        let onCapacityChange = PassthroughSubject<Int, Never>()
+        let onPriceToChange = PassthroughSubject<Int, Never>()
+        let onPriceFromChange = PassthroughSubject<Int, Never>()
+        
+        let onSettingsSave = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         var screenState: ProcessingState = .loading
         var accommodations: [AccommodationSearchModel] = []
+        
+        var type: String = ""
+        var rooms: Int = 0
+        var beds: Int = 0
+        var capacity: Int = 0
+        var priceTo: Int = 0
+        var priceFrom: Int = 0
         
         var filterSettings: Filter = .empty
         var showingFilter = false

@@ -14,27 +14,19 @@ final class UserCoordinator: NavigationCoordinatable {
     let stack = NavigationStack(initial: \UserCoordinator.start)
 
     @Root var start = makeUser
-    @Route(.push) var booking = makeUserBooking
     
     private let apiService = UserApiService()
-    private let bookingApiService = BookingApiService()
-    private let accomApiService = AccommodationApiService()
     
-#if DEBUG
+    #if DEBUG
     deinit {
         print("Coordinator \(self) DEINITED!!!")
     }
-#endif
+    #endif
 }
 
 extension UserCoordinator {
     @ViewBuilder func makeUser() -> some View {
         let viewModel = UserProfileViewModel(apiService: apiService)
         UserView(viewModel: viewModel)
-    }
-    
-    @ViewBuilder func makeUserBooking() -> some View {
-        let viewModel = UserBookingViewModel(apiService: apiService,
-                                             bookingApiService: bookingApiService)
     }
 }

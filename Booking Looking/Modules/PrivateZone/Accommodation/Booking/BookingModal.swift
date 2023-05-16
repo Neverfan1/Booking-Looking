@@ -16,6 +16,9 @@ struct BookingView: View {
         StateView(state: viewModel.output.screenState,
                   content: content)
             .navigationBarTitle("Бронирование", displayMode: .inline)
+            .onAppear {
+                print(viewModel.output.freeDates)
+            }
     }
 }
 
@@ -40,6 +43,7 @@ private extension BookingView {
 private extension BookingView {
     func buttonTap() {
         print(groupDatesByMonthAndYear(viewModel.output.selectedDates))
+        viewModel.input.onSave.send()
     }
 }
 

@@ -30,6 +30,15 @@ func monthNameFromNumberEng(_ month: Int) -> String {
     return monthNames[month - 1]
 }
 
+func monthToInt(month: String) -> Int {
+    let monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+    let index = (monthNames.firstIndex(of: month) ?? -2) + 1
+    return index
+}
+
 func convertDatesToDictionary(_ dates: [Date]) -> [String: Any] {
     guard let firstDate = dates.first else {
         return [:]

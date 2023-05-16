@@ -17,9 +17,9 @@ extension BookingApi: TargetType {
     var path: String {
         switch self {
         case .postDate:
-            return "/booking-date"
+            return "/booking-date/"
         case .deleteDate(let id):
-            return "/cancel-booking-date/\(id)"
+            return "/cancel-booking-date/\(id)/"
         }
     }
     
