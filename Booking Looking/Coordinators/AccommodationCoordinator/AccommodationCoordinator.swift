@@ -14,9 +14,11 @@ final class AccommodationCoordinator: NavigationCoordinatable {
     @Root var start = makeSearch
     @Route(.push) var detail = makeDetail
     @Route(.modal) var booking = makeBooking
+    @Route(.push) var ownerProfile = makeOwnerProfile
 
     private let accomApiService = AccommodationApiService()
     private let bookingApiService = BookingApiService()
+    private let ownerService = OwnerApiService()
     
 #if DEBUG
     deinit {
@@ -45,5 +47,12 @@ extension AccommodationCoordinator {
                                          apiService: bookingApiService,
                                          router: self)
         BookingView(viewModel: viewModel)
+    }
+    
+    @ViewBuilder func makeOwnerProfile(id: (Int, Int)) -> some View {
+        let viewModel = OwnerProfileViewModel(id: id,
+                                              apiService: ownerService,
+                                              router: self)
+        OwnerProfileScreen(viewModel: viewModel)
     }
 }

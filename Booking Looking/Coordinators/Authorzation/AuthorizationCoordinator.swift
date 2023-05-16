@@ -49,6 +49,6 @@ extension AuthorizationCoordinator {
     @ViewBuilder func makeCode() -> some View {
         let viewModel = EnterCodeViewModel(apiService: apiService,
                                            router: self)
-        EnterCodeScreen2(viewModel: viewModel)
+        EnterCodeScreen(viewModel: viewModel)
     }
 }

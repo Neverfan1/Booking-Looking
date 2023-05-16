@@ -6,11 +6,23 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OwnerProfileScreen: View {
-    let owner: OwnerModel
+    
+    @StateObject var viewModel: OwnerProfileViewModel
     
     var body: some View {
+        StateView(state: viewModel.output.screenState,
+                  onAppear: viewModel.input.onAppear,
+                  content: content)
+        .navigationTitle("Профиль пользователя")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+extension OwnerProfileScreen{
+    
+    func content() -> some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
                 photoOwner
@@ -21,24 +33,20 @@ struct OwnerProfileScreen: View {
                 VStack(alignment: .leading, spacing: 10) {
                     descriptionOwner
                     contactOwner
-                    
                 }
                 .font(.system(size: 18))
                 
-                AppButton(style: .standart, title: "Все жилища хозяина", action: {
-                    
-                }, isButtonEnabled: true)
-                .padding(.top, 50)
+                Text("Все жилища хозяина")
+                    .padding(.top, 50)
+                
+                accomCells
             }
             .padding(.horizontal, 30)
         }
-        .navigationTitle("Профиль пользователя")
     }
-}
-extension OwnerProfileScreen{
     
     var photoOwner: some View {
-        if owner.image == "null" {
+        if viewModel.output.owner.image == "null" {
             return AnyView(
                 Image(systemName: "person.circle.fill")
                     .resizable()
@@ -47,7 +55,7 @@ extension OwnerProfileScreen{
             )
         } else {
             return AnyView(
-                NetworkImage(imageURL: URL(string: owner.image),
+                NetworkImage(imageURL: URL(string: viewModel.output.owner.image),
                              width: UIScreen.main.bounds.width / 1.2,
                              height: UIScreen.main.bounds.height / 4,
                              cornerRadius: 10)
@@ -56,7 +64,7 @@ extension OwnerProfileScreen{
     }
 
     var nameOwner: some View{
-        Text(owner.name)
+        Text(viewModel.output.owner.name)
             .font(.title)
             .fontWeight(.bold)
         
@@ -68,7 +76,7 @@ extension OwnerProfileScreen{
             Text("Описание:")
                 .fontWeight(.bold)
             Spacer()
-            Text(owner.description)
+            Text(viewModel.output.owner.description)
         }
     }
     
@@ -78,14 +86,30 @@ extension OwnerProfileScreen{
             Text("Телефон:")
                 .fontWeight(.bold)
             Spacer()
-            Text(owner.contact)
+            Text(viewModel.output.owner.contact)
         }
     }
-}
+    
+    var accomCells: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(viewModel.output.accommodations) { accommodation in
 
-struct OwnerProfileScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        OwnerProfileScreen(owner: OwnerModel.mock())
+                AccommodationCard(model: accommodation,
+                                  onCellTap: viewModel.input.onAccomTap)
+            }
+        }
+        .padding()
     }
 }
 
+private extension OwnerProfileScreen {
+    
+}
+
+#if DEBUG
+struct OwnerProfileScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        OwnerProfileScreen(viewModel: OwnerProfileViewModel(id: (1,1), apiService: OwnerApiService(), router: nil))
+    }
+}
+#endif

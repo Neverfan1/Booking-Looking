@@ -41,6 +41,7 @@ private extension AccommodationDetailViewModel {
     func bind() {
         bindOnAppear()
         bindOnDateTap()
+        bindOwnerTap()
     }
     
     func bindOnAppear() {
@@ -80,12 +81,22 @@ private extension AccommodationDetailViewModel {
             }
             .store(in: &cancellable)
     }
+    
+    func bindOwnerTap() {
+        input.onOwnerTap
+            .sink { [weak self] id in
+                guard let self = self else { return }
+                self.router?.pushToOwner(id: (id, self.output.accommodation.id))
+            }
+            .store(in: &cancellable)
+    }
 }
 
 extension AccommodationDetailViewModel {
     struct Input {
         let onAppear = PassthroughSubject<Void, Never>()
         let onDateTap = PassthroughSubject<Void, Never>()
+        let onOwnerTap = PassthroughSubject<Int, Never>()
     }
     
     struct Output {

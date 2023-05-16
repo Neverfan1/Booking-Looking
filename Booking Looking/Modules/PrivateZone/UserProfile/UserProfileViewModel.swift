@@ -18,8 +18,11 @@ final class UserProfileViewModel: ObservableObject {
     
     private var cancellable = Set<AnyCancellable>()
     
-    init(apiService: ProfileApiProtocol) {
+    private let authState: CurrentValueSubject<AuthState, Never>
+    
+    init(apiService: ProfileApiProtocol, authState: CurrentValueSubject<AuthState, Never>) {
         self.apiService = apiService
+        self.authState = authState
         
         self.input = Input()
         self.output = Output()
@@ -31,6 +34,7 @@ final class UserProfileViewModel: ObservableObject {
 private extension UserProfileViewModel {
     func bind() {
         bindOnAppear()
+        bindExitTap()
     }
     
     func bindOnAppear() {
@@ -61,11 +65,22 @@ private extension UserProfileViewModel {
             }
             .store(in: &cancellable)
     }
+    
+    func bindExitTap() {
+        input.onExitTap
+            .sink { [weak self] in
+                LocalStorage.current.token = ""
+                LocalStorage.current.isComplited = false
+                self?.authState.send(.unauthorized)
+            }
+            .store(in: &cancellable)
+    }
 }
 
 extension UserProfileViewModel {
     struct Input {
         let onAppear = PassthroughSubject<Void, Never>()
+        let onExitTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {

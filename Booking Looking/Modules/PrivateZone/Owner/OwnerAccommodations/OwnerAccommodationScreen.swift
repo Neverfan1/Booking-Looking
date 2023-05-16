@@ -6,30 +6,33 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OwnerAccommodationScreen: View {
+    
     let accommodations: [AccommodationSearchModel]
-
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    ForEach(accommodations) { accommodation in
-
-                        AccommodationCard(model: accommodation)
-                    }
-                }
-                .padding()
-            }
-        }
+        StateView(state: .loading,
+                  content: content)
     }
 
 }
 
+private extension OwnerAccommodationScreen {
+    func content() -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                ForEach(accommodations) { accommodation in
 
-
-
+                    AccommodationCard(model: accommodation,
+                                      onCellTap: PassthroughSubject<Int, Never>())
+                }
+            }
+            .padding()
+        }
+    }
+}
 
 struct OwnerAccommodationScreen_Previews: PreviewProvider {
     static var previews: some View {

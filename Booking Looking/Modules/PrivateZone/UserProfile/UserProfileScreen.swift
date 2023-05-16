@@ -36,6 +36,8 @@ extension UserView{
                     
                 }
                 .font(.system(size: 18))
+                Spacer()
+                exitButton
             }
             .padding(.horizontal, 30)
         }
@@ -85,12 +87,20 @@ extension UserView{
             Text(viewModel.output.user.phoneNumber)
         }
     }
+    
+    var exitButton: some View {
+        AppButton(style: .exit,
+                  title: "Выйти",
+                  action: { viewModel.input.onExitTap.send() },
+                  isButtonEnabled: true)
+    }
 }
 
 #if DEBUG
+import Combine
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(viewModel: UserProfileViewModel(apiService: UserApiService()))
+        UserView(viewModel: UserProfileViewModel(apiService: UserApiService(), authState: CurrentValueSubject<AuthState, Never>(.authorized)))
     }
 }
 #endif

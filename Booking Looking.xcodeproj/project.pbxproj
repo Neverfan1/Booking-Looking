@@ -92,6 +92,15 @@
 		D059B3072A115CEA00D85F8A /* UserBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3062A115CEA00D85F8A /* UserBookingViewModel.swift */; };
 		D059B3092A11619D00D85F8A /* AccommodationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B3082A11619D00D85F8A /* AccommodationDetailViewModel.swift */; };
 		D059B30B2A11773100D85F8A /* SearchAccommodationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D059B30A2A11773100D85F8A /* SearchAccommodationViewModel.swift */; };
+		D0634ED22A14183E0020EBA9 /* OwnerProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634ECF2A14183E0020EBA9 /* OwnerProfileScreen.swift */; };
+		D0634ED32A14183E0020EBA9 /* OwnerAccommodationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634ED12A14183E0020EBA9 /* OwnerAccommodationScreen.swift */; };
+		D0634ED52A1418BD0020EBA9 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634ED42A1418BD0020EBA9 /* OwnerModel.swift */; };
+		D0634ED72A1418CE0020EBA9 /* ServerOwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634ED62A1418CE0020EBA9 /* ServerOwnerModel.swift */; };
+		D0634ED92A141B6D0020EBA9 /* OwnerModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634ED82A141B6D0020EBA9 /* OwnerModelMapper.swift */; };
+		D0634EDC2A141D2D0020EBA9 /* OwnerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634EDB2A141D2D0020EBA9 /* OwnerApi.swift */; };
+		D0634EDE2A141D340020EBA9 /* OwnerApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634EDD2A141D340020EBA9 /* OwnerApiService.swift */; };
+		D0634EE02A1420800020EBA9 /* OwnerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634EDF2A1420800020EBA9 /* OwnerProfileViewModel.swift */; };
+		D0634EE22A1422FE0020EBA9 /* OwnerProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0634EE12A1422FE0020EBA9 /* OwnerProfileRouter.swift */; };
 		D0D3CFB32A0CEC1F008B5BF7 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +184,15 @@
 		D059B3062A115CEA00D85F8A /* UserBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingViewModel.swift; sourceTree = "<group>"; };
 		D059B3082A11619D00D85F8A /* AccommodationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationDetailViewModel.swift; sourceTree = "<group>"; };
 		D059B30A2A11773100D85F8A /* SearchAccommodationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAccommodationViewModel.swift; sourceTree = "<group>"; };
+		D0634ECF2A14183E0020EBA9 /* OwnerProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerProfileScreen.swift; sourceTree = "<group>"; };
+		D0634ED12A14183E0020EBA9 /* OwnerAccommodationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerAccommodationScreen.swift; sourceTree = "<group>"; };
+		D0634ED42A1418BD0020EBA9 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
+		D0634ED62A1418CE0020EBA9 /* ServerOwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOwnerModel.swift; sourceTree = "<group>"; };
+		D0634ED82A141B6D0020EBA9 /* OwnerModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModelMapper.swift; sourceTree = "<group>"; };
+		D0634EDB2A141D2D0020EBA9 /* OwnerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerApi.swift; sourceTree = "<group>"; };
+		D0634EDD2A141D340020EBA9 /* OwnerApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerApiService.swift; sourceTree = "<group>"; };
+		D0634EDF2A1420800020EBA9 /* OwnerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerProfileViewModel.swift; sourceTree = "<group>"; };
+		D0634EE12A1422FE0020EBA9 /* OwnerProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerProfileRouter.swift; sourceTree = "<group>"; };
 		D0D3CFB22A0CEC1F008B5BF7 /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -454,6 +472,7 @@
 			children = (
 				D001D7052A0B946800B44C63 /* UserBooking */,
 				D001D7072A0B946800B44C63 /* UserProfile */,
+				D0634ECD2A14183E0020EBA9 /* Owner */,
 				D001D7092A0B946800B44C63 /* Accommodation */,
 			);
 			path = PrivateZone;
@@ -568,6 +587,7 @@
 		D001D72D2A0BA07300B44C63 /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
+				D0634EDA2A141D210020EBA9 /* OwnerAPIService */,
 				D001D73C2A0BB51300B44C63 /* AuthAPIService */,
 				D044D40D2A0E490C00F06177 /* AccomodationService */,
 				D044D4142A0E581A00F06177 /* BookingAPIService */,
@@ -594,6 +614,7 @@
 				D001D7432A0BBDE900B44C63 /* ServerResponse.swift */,
 				D001D7302A0BAEFC00B44C63 /* ServerUserModel.swift */,
 				D044D4052A0E2C4700F06177 /* ServerBooking.swift */,
+				D0634ED62A1418CE0020EBA9 /* ServerOwnerModel.swift */,
 			);
 			path = ServerModels;
 			sourceTree = "<group>";
@@ -604,6 +625,7 @@
 				D001D7322A0BAEFC00B44C63 /* FilterModel.swift */,
 				D001D7332A0BAEFC00B44C63 /* AccommodationModel.swift */,
 				D001D7342A0BAEFC00B44C63 /* UserModel.swift */,
+				D0634ED42A1418BD0020EBA9 /* OwnerModel.swift */,
 			);
 			path = LocalModels;
 			sourceTree = "<group>";
@@ -616,6 +638,7 @@
 				D001D7512A0BCA4700B44C63 /* CheckCodeModelMapper.swift */,
 				D001D7582A0BCFAD00B44C63 /* UserModelMapper.swift */,
 				D044D4092A0E300400F06177 /* AccommodationModelMapper.swift */,
+				D0634ED82A141B6D0020EBA9 /* OwnerModelMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -710,6 +733,42 @@
 			path = Processing;
 			sourceTree = "<group>";
 		};
+		D0634ECD2A14183E0020EBA9 /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				D0634ECE2A14183E0020EBA9 /* OwnerProfile */,
+				D0634ED02A14183E0020EBA9 /* OwnerAccommodations */,
+			);
+			path = Owner;
+			sourceTree = "<group>";
+		};
+		D0634ECE2A14183E0020EBA9 /* OwnerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				D0634ECF2A14183E0020EBA9 /* OwnerProfileScreen.swift */,
+				D0634EDF2A1420800020EBA9 /* OwnerProfileViewModel.swift */,
+				D0634EE12A1422FE0020EBA9 /* OwnerProfileRouter.swift */,
+			);
+			path = OwnerProfile;
+			sourceTree = "<group>";
+		};
+		D0634ED02A14183E0020EBA9 /* OwnerAccommodations */ = {
+			isa = PBXGroup;
+			children = (
+				D0634ED12A14183E0020EBA9 /* OwnerAccommodationScreen.swift */,
+			);
+			path = OwnerAccommodations;
+			sourceTree = "<group>";
+		};
+		D0634EDA2A141D210020EBA9 /* OwnerAPIService */ = {
+			isa = PBXGroup;
+			children = (
+				D0634EDB2A141D2D0020EBA9 /* OwnerApi.swift */,
+				D0634EDD2A141D340020EBA9 /* OwnerApiService.swift */,
+			);
+			path = OwnerAPIService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -799,9 +858,11 @@
 				D044D4112A0E495300F06177 /* AccommodationApiService.swift in Sources */,
 				D001D6E62A0B901100B44C63 /* AppButtonStyle.swift in Sources */,
 				D001D7262A0B9EEA00B44C63 /* RegistrationViewModel.swift in Sources */,
+				D0634EDC2A141D2D0020EBA9 /* OwnerApi.swift in Sources */,
 				D001D7032A0B943D00B44C63 /* Validation.swift in Sources */,
 				D001D7382A0BAEFC00B44C63 /* FilterModel.swift in Sources */,
 				D001D7142A0B946800B44C63 /* AccommodationDetailScreen.swift in Sources */,
+				D0634EE22A1422FE0020EBA9 /* OwnerProfileRouter.swift in Sources */,
 				D001D71F2A0B947200B44C63 /* RegistrationScreen.swift in Sources */,
 				D035386E2A12577B007D2918 /* BookingRouter.swift in Sources */,
 				D001D7012A0B943400B44C63 /* Converter.swift in Sources */,
@@ -817,6 +878,7 @@
 				D001D72C2A0B9F9300B44C63 /* ViewModelProtocol.swift in Sources */,
 				D059B2FB2A1142E500D85F8A /* AuthorizationViewModel.swift in Sources */,
 				D035386A2A124F98007D2918 /* AccommodationCoordinator.swift in Sources */,
+				D0634ED72A1418CE0020EBA9 /* ServerOwnerModel.swift in Sources */,
 				D044D4162A0E583E00F06177 /* BookingApi.swift in Sources */,
 				B5DA329729F1CAF700DD2F2B /* MainCoordinator.swift in Sources */,
 				D001D7372A0BAEFC00B44C63 /* ServerUserModel.swift in Sources */,
@@ -845,6 +907,7 @@
 				D001D7422A0BB90600B44C63 /* AuthApiService.swift in Sources */,
 				D059B3092A11619D00D85F8A /* AccommodationDetailViewModel.swift in Sources */,
 				B5DA328729F1CA1B00DD2F2B /* BookingLookingApp.swift in Sources */,
+				D0634ED32A14183E0020EBA9 /* OwnerAccommodationScreen.swift in Sources */,
 				D001D6EB2A0B902300B44C63 /* Calendar.swift in Sources */,
 				B5DA32A829F1CD6B00DD2F2B /* LocalStorage.swift in Sources */,
 				D001D7402A0BB59400B44C63 /* Consts.swift in Sources */,
@@ -857,6 +920,7 @@
 				D044D4062A0E2C4700F06177 /* ServerBooking.swift in Sources */,
 				D050F63E2A135D7600F44B61 /* UserBookingCoordinator.swift in Sources */,
 				D059B3072A115CEA00D85F8A /* UserBookingViewModel.swift in Sources */,
+				D0634EE02A1420800020EBA9 /* OwnerProfileViewModel.swift in Sources */,
 				D001D6FA2A0B934000B44C63 /* TabBar.swift in Sources */,
 				D001D6FF2A0B942B00B44C63 /* ColorTheme.swift in Sources */,
 				D001D7112A0B946800B44C63 /* UserBookingScreen.swift in Sources */,
@@ -865,13 +929,17 @@
 				D03538672A124ECD007D2918 /* AccommodationDetailRouter.swift in Sources */,
 				D001D7592A0BCFAD00B44C63 /* UserModelMapper.swift in Sources */,
 				D001D6EE2A0B926900B44C63 /* ChekBox.swift in Sources */,
+				D0634ED52A1418BD0020EBA9 /* OwnerModel.swift in Sources */,
 				D044D40F2A0E494100F06177 /* AccommodationApi.swift in Sources */,
 				B5DA32A629F1CC6E00DD2F2B /* APIError.swift in Sources */,
 				D001D7162A0B946800B44C63 /* FilterModal.swift in Sources */,
 				D059B2F92A11414000D85F8A /* RegistrationRouter.swift in Sources */,
+				D0634EDE2A141D340020EBA9 /* OwnerApiService.swift in Sources */,
 				D059B2F52A1139FF00D85F8A /* ProcessingState.swift in Sources */,
+				D0634ED92A141B6D0020EBA9 /* OwnerModelMapper.swift in Sources */,
 				D03538642A123EB9007D2918 /* BookingViewModel.swift in Sources */,
 				D001D73B2A0BAEFC00B44C63 /* BaseModelMapper.swift in Sources */,
+				D0634ED22A14183E0020EBA9 /* OwnerProfileScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,7 +1147,7 @@
 			repositoryURL = "https://github.com/rundfunk47/stinsen";
 			requirement = {
 				kind = exactVersion;
-				version = 2.0.13;
+				version = 2.0.12;
 			};
 		};
 		B5DA32C029F1D64400DD2F2B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

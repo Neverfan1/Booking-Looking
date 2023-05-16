@@ -123,13 +123,17 @@ private extension AccommodationDetail {
     }
     
     var owner: some View {
-        HStack(alignment: .top) {
-            Text("Владелец:")
-                .bold()
-            Text(viewModel.output.accommodation.ownerName)
+        Button(action: {
+            viewModel.input.onOwnerTap.send(viewModel.output.accommodation.ownerId)
+        }){
+            HStack(alignment: .top) {
+                Text("Владелец:")
+                    .bold()
+                Text(viewModel.output.accommodation.ownerName)
+            }
+            .padding(.top, 5)
+            .font(.system(size: 18))
         }
-        .padding(.top, 5)
-        .font(.system(size: 18))
         
     }
     

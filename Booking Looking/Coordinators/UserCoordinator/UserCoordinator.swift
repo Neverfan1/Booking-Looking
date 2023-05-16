@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Stinsen
+import Combine
 
 final class UserCoordinator: NavigationCoordinatable {
 
@@ -16,6 +17,11 @@ final class UserCoordinator: NavigationCoordinatable {
     @Root var start = makeUser
     
     private let apiService = UserApiService()
+    private var authState: CurrentValueSubject<AuthState, Never>
+    
+    init(authState: CurrentValueSubject<AuthState, Never>) {
+        self.authState = authState
+    }
     
     #if DEBUG
     deinit {
@@ -26,7 +32,7 @@ final class UserCoordinator: NavigationCoordinatable {
 
 extension UserCoordinator {
     @ViewBuilder func makeUser() -> some View {
-        let viewModel = UserProfileViewModel(apiService: apiService)
+        let viewModel = UserProfileViewModel(apiService: apiService, authState: authState)
         UserView(viewModel: viewModel)
     }
 }

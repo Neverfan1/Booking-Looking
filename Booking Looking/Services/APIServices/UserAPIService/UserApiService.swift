@@ -31,7 +31,7 @@ extension UserApiService: ProfileApiProtocol {
             .map { $0.data }
             .map { UserModelMapper().toLocal(serverEntity: $0) }
             .mapError({ error in
-                print(error)
+                print(error.response?.statusCode)
                 return .ParseError
             })
             .receive(on: DispatchQueue.main)

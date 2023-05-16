@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct EnterCodeScreen: View {
+    
+    @StateObject var viewModel: EnterCodeViewModel
+    
     @State private var code: [String] = ["", "", "", ""]
     @State private var isButtonEnabled = false
     @FocusState private var focusedField: Int?
@@ -17,11 +20,11 @@ struct EnterCodeScreen: View {
         VStack(spacing: 20) {
             topLogo
             codeCells
+            
             AppButton(style: .standart,
                       title: "Войти",
                       action: {
-                let combined = code.joined(separator: "")
-                print(combined)
+                viewModel.input.onConfirmTap.send()
             },
                       isButtonEnabled: isButtonEnabled)
             .padding(.top, UIScreen.main.bounds.height/13.6)
@@ -55,6 +58,7 @@ extension EnterCodeScreen{
                         if newValue.count == 1 && index < code.count - 1 {
                             focusedField = index + 1
                         }
+                        viewModel.input.onChangeCode.send(code.joined(separator: ""))
                     }
             }
         }
@@ -66,7 +70,7 @@ extension EnterCodeScreen{
 
 struct EnterCodeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EnterCodeScreen()
+        EnterCodeScreen(viewModel: EnterCodeViewModel(apiService: AuthApiService(), router: nil))
     }
 }
 

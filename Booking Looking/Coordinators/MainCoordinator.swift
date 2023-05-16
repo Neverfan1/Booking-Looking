@@ -52,6 +52,6 @@ extension MainCoordinator {
     }
 
     func makeTabBar() -> TabBarCoordinator {
-        TabBarCoordinator()
+        TabBarCoordinator(authState: authState)
     }
 }

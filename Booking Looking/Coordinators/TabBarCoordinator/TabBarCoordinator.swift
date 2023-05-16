@@ -5,7 +5,6 @@
 //  Created by Данила Парамин on 02.05.2023.
 //
 
-import Foundation
 import SwiftUI
 import Stinsen
 import Combine
@@ -13,7 +12,7 @@ import Combine
 final class TabBarCoordinator: TabCoordinatable {
     var child = TabChild(
         startingItems: [
-             \TabBarCoordinator.groups,
+            \TabBarCoordinator.groups,
              \TabBarCoordinator.userBookings,
              \TabBarCoordinator.accommodations
         ]
@@ -23,16 +22,22 @@ final class TabBarCoordinator: TabCoordinatable {
     @Route(tabItem: makeUserBookingsTab) var userBookings = makeUserBookings
     @Route(tabItem: makeAccommodationsTab) var accommodations = makeAccommodations
     
-    #if DEBUG
+    private let authState: CurrentValueSubject<AuthState, Never>
+    
+    init(authState: CurrentValueSubject<AuthState, Never>) {
+        self.authState = authState
+    }
+    
+#if DEBUG
     deinit {
         print("Deinit AuthenticatedCoordinator")
     }
-    #endif
+#endif
 }
 
 extension TabBarCoordinator {
     func makeGroups() -> NavigationViewCoordinator<UserCoordinator> {
-        NavigationViewCoordinator(UserCoordinator())
+        NavigationViewCoordinator(UserCoordinator(authState: authState))
     }
     
     @ViewBuilder func makeGroupsTab(isActive: Bool) -> some View {
@@ -43,11 +48,11 @@ extension TabBarCoordinator {
     func makeAccommodations() -> NavigationViewCoordinator<AccommodationCoordinator> {
         NavigationViewCoordinator(AccommodationCoordinator())
     }
-
+    
     func makeUserBookings() -> NavigationViewCoordinator<UserBookingCoordinator> {
         NavigationViewCoordinator(UserBookingCoordinator())
     }
-
+    
     @ViewBuilder func makeUserBookingsTab(isActive: Bool) -> some View {
         Image(systemName: "dollarsign.arrow.circlepath")
         Text("Брони")
