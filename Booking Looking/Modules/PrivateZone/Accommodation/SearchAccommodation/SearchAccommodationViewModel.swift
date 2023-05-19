@@ -134,7 +134,11 @@ private extension SearchAccommodationViewModel {
     func bindFilterSettings() {
         input.onTypeChange
             .sink { [weak self] in
-                self?.output.filterSettings.type = $0
+                if $0 != "" && $0 != "Не выбрано"{
+                    self?.output.filterSettings.type = $0
+                } else {
+                    self?.output.filterSettings.type = nil
+                }
             }
             .store(in: &cancellable)
         
@@ -170,8 +174,8 @@ private extension SearchAccommodationViewModel {
         
         input.onPriceFromChange
             .sink { [weak self] in
-                if $0 != 0 {
-                    self?.output.filterSettings.priceFrom = $0
+                if $0 != "" {
+                    self?.output.filterSettings.priceFrom = Int($0)
                 } else {
                     self?.output.filterSettings.priceFrom = nil
                 }
@@ -180,8 +184,8 @@ private extension SearchAccommodationViewModel {
         
         input.onPriceToChange
             .sink { [weak self] in
-                if $0 != 0 {
-                    self?.output.filterSettings.priceTo = $0
+                if $0 != "" {
+                    self?.output.filterSettings.priceTo = Int($0)
                 } else {
                     self?.output.filterSettings.priceTo = nil
                 }
@@ -209,8 +213,8 @@ extension SearchAccommodationViewModel {
         let onRoomsChange = PassthroughSubject<Int, Never>()
         let onBedsChange = PassthroughSubject<Int, Never>()
         let onCapacityChange = PassthroughSubject<Int, Never>()
-        let onPriceToChange = PassthroughSubject<Int, Never>()
-        let onPriceFromChange = PassthroughSubject<Int, Never>()
+        let onPriceToChange = PassthroughSubject<String, Never>()
+        let onPriceFromChange = PassthroughSubject<String, Never>()
         
         let onSettingsSave = PassthroughSubject<Void, Never>()
     }
@@ -219,12 +223,12 @@ extension SearchAccommodationViewModel {
         var screenState: ProcessingState = .loading
         var accommodations: [AccommodationSearchModel] = []
         
-        var type: String = ""
-        var rooms: Int = 0
-        var beds: Int = 0
-        var capacity: Int = 0
-        var priceTo: Int = 0
-        var priceFrom: Int = 0
+        var type = ""
+        var rooms = 0
+        var beds = 0
+        var capacity = 0
+        var priceTo = ""
+        var priceFrom = ""
         
         var filterSettings: Filter = .empty
         var showingFilter = false

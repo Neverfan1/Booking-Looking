@@ -49,7 +49,6 @@ private extension BookingViewModel {
                 self?.output.screenState = .loading
             })
             .map { [unowned self] in
-                // TODO: - do huetu
                 self.apiService.postDate(dates: groupDatesByMonthAndYear(self.output.selectedDates),
                                          id: self.output.id)
                 .materialize()

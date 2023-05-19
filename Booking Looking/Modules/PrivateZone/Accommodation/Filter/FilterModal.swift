@@ -13,20 +13,20 @@ struct FilterView: View {
     @Binding var rooms: Int
     @Binding var beds: Int
     @Binding var capacity: Int
-    @Binding var priceTo: Int
-    @Binding var priceFrom: Int
+    @Binding var priceTo: String
+    @Binding var priceFrom: String
     
     let onTypeChange: PassthroughSubject<String, Never>
     let onRoomsChange: PassthroughSubject<Int, Never>
     let onBedsChange: PassthroughSubject<Int, Never>
     let onCapacityChange: PassthroughSubject<Int, Never>
-    let onPriceToChange: PassthroughSubject<Int, Never>
-    let onPriceFromChange: PassthroughSubject<Int, Never>
+    let onPriceToChange: PassthroughSubject<String, Never>
+    let onPriceFromChange: PassthroughSubject<String, Never>
     
     let onSettingsSave: PassthroughSubject<Void, Never>
     
-    @State var filterPriceFrom: String = ""
-    @State var filterPriceTo: String = ""
+//    @State var filterPriceFrom: String = ""
+//    @State var filterPriceTo: String = ""
     
     let housingTypes = ["Не выбрано", "Квартира", "Гостиница", "Дом"]
     let roomNumbers = [0] + Array(1...10)
@@ -111,18 +111,16 @@ private extension FilterView {
     
     var priceSection: some View{
         Section(header: Text("Цена")) {
-            TextField("Минимальная цена", text: $filterPriceFrom)
+            TextField("Минимальная цена", text: $priceFrom)
                 .keyboardType(.numberPad)
-                .onChange(of: filterPriceFrom) { newValue in
-                    let intValue = Int(newValue)!
-                    onPriceFromChange.send(intValue)
+                .onChange(of: priceFrom) { newValue in
+                    onPriceFromChange.send(newValue)
                 }
             
-            TextField("Максимальная цена", text: $filterPriceTo)
+            TextField("Максимальная цена", text: $priceTo)
                 .keyboardType(.numberPad)
-                .onChange(of: filterPriceTo) { newValue in
-                    let intValue = Int(newValue)!
-                    onPriceToChange.send(intValue)
+                .onChange(of: priceTo) { newValue in
+                    onPriceFromChange.send(newValue)
                 }
         }
     }
